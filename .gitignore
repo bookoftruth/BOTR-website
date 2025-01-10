@@ -11,6 +11,7 @@ node_modules/
 # Build output
 dist/
 build/
+.next/
 
 # Environment variables
 .env
@@ -49,6 +50,7 @@ jest/
 
 # IntelliJ IDEA
 out/
+.idea/
 
 # Misc
 *.swp
