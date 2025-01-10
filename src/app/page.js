@@ -27,7 +27,7 @@ export default function Home() {
             autoPlay
             loop
             muted
-            className="max-w-[80%] max-h-[80%] shadow-lg rounded-md"
+            className="max-w-[80%] max-h-[80%] shadow-lg rounded-md pointer-events-none"
           >
             <source src="/videos/loading.mp4" type="video/mp4" />
             Your browser does not support the video tag.
@@ -56,7 +56,7 @@ export default function Home() {
             autoPlay
             loop
             muted
-            className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
+            className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
           >
             <source src="/videos/background.mp4" type="video/mp4" />
             Your browser does not support the video tag.

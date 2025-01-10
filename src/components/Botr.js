@@ -22,8 +22,8 @@ const Botr = () => {
     const shaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
         videoTexture: { value: videoTexture },
-        contrast: { value: 1.0 }, // Default contrast
-        whiteBalance: { value: new THREE.Vector3(1.0, 1.0, 1.0) } // Default white balance
+        contrast: { value: 1.0 },
+        whiteBalance: { value: new THREE.Vector3(1.0, 1.0, 1.0) }
       },
       fragmentShader: `
         uniform sampler2D videoTexture;
@@ -56,6 +56,7 @@ const Botr = () => {
 
         if (object.name === 'bookoftruth') {
           object.material = shaderMaterial;
+          object.userData.pointerEvents = 'none';
         }
       }
     });

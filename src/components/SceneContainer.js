@@ -7,7 +7,7 @@ import Botr from './Botr';
 import Lights from './Lights';
 
 export function SceneContainer() {
-  const testing = true;
+  const testing = false;
 
   const botrRef = useRef();
   const isDraggingRef = useRef(false);
