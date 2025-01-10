@@ -14,6 +14,8 @@ const Botr = () => {
     video.crossOrigin = 'anonymous';
     video.loop = true;
     video.muted = true;
+    video.playsInline = true;
+    video.controls = false; 
     video.play();
     videoRef.current = video;
 

@@ -9,14 +9,14 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowButton(true); // Show button after 5 seconds
+      setShowButton(true);
     }, 5000);
 
-    return () => clearTimeout(timer); // Cleanup timer
+    return () => clearTimeout(timer);
   }, []);
 
   const handleEnter = () => {
-    setLoading(false); // Transition to the main content
+    setLoading(false);
   };
 
   return (
@@ -27,6 +27,8 @@ export default function Home() {
             autoPlay
             loop
             muted
+            playsInline
+            controls={false}
             className="max-w-[80%] max-h-[80%] shadow-lg rounded-md pointer-events-none"
           >
             <source src="/videos/loading.mp4" type="video/mp4" />
@@ -56,6 +58,8 @@ export default function Home() {
             autoPlay
             loop
             muted
+            playsInline
+            controls={false}
             className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none"
           >
             <source src="/videos/background.mp4" type="video/mp4" />
