@@ -1,0 +1,54 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Cache
+.cache/
+*.tmp
+*.temp
+
+# Editor and IDE settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.DS_Store
+
+# System files
+Thumbs.db
+
+# Git-specific
+.git/
+*.orig
+
+# React and Webpack
+public/static/
+*.map
+*.lock
+
+# Testing
+coverage/
+jest/
+
+# IntelliJ IDEA
+out/
+
+# Misc
+*.swp
