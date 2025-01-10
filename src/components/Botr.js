@@ -61,7 +61,7 @@ const Botr = () => {
     });
   }, [model]);
 
-  return <primitive object={model.scene} scale={4} rotation={[-Math.PI / 4, 0, 0]} />
+  return <primitive object={model.scene} scale={4} position={[-0.15, 0, 0]} rotation={[-Math.PI / 4, 0, 0]} />
 };
 
 export default Botr;
