@@ -68,7 +68,7 @@ export function SceneContainer() {
           {testing && <axesHelper args={[2]} />}
           {testing && <gridHelper args={[10, 10]} />}
 
-          <Lights isTesting={testing} />
+          <Lights />
 
           <Float speed={1} rotationIntensity={1} floatIntensity={1}>
             <group ref={botrRef}>

@@ -18,7 +18,6 @@ const Botr = () => {
     videoRef.current = video;
 
     const videoTexture = new THREE.VideoTexture(video);
-    // videoTexture.encoding = THREE.sRGBEncoding;
     videoTexture.minFilter = THREE.LinearFilter;
     videoTexture.magFilter = THREE.LinearFilter;
 

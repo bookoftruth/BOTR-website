@@ -1,18 +1,8 @@
-import { useHelper } from "@react-three/drei";
-import { useRef } from "react";
-import { DirectionalLightHelper } from "three";
-
-const Lights = ({ isTesting }) => {
-    const lightRef = useRef();
-    {
-        isTesting ? useHelper(lightRef, DirectionalLightHelper, 5, "red") : null;
-    }
-
+const Lights = () => {
     return (
         <>
             <ambientLight intensity={0.5} />
             <directionalLight
-                ref={lightRef}
                 position={[-2.5, 7.5, 2.5]}
                 castShadow
                 shadow-mapSize-height={1000}
