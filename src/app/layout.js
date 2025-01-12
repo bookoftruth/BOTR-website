@@ -9,7 +9,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <div className="fixed h-screen w-screen overflow-hidden font-terminal">
+          {children}
+        </div>
       </body>
     </html>
   );

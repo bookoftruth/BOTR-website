@@ -1,7 +1,8 @@
 'use client';
 
-import App from "@/components/App";
-import Loader from "@/components/Loader";
+import Layout from "@/components/layout/Layout";
+import Loader from "@/components/layout/Loader";
+import { SceneContainer } from "@/components/botr/SceneContainer";
 import { useState } from "react";
 
 export default function Home() {
@@ -10,7 +11,7 @@ export default function Home() {
   const [isMuted, setIsMuted] = useState(true);
 
   return (
-    <div className="fixed h-screen w-screen overflow-hidden font-terminal">
+    <>
       {loading ? 
         <Loader
           setLoading={setLoading} 
@@ -19,11 +20,10 @@ export default function Home() {
           setIsMuted={setIsMuted}
         />
         : 
-        <App 
-          isMuted={isMuted} 
-          setIsMuted={setIsMuted}
-        />
+        <Layout isMuted={isMuted} setIsMuted={setIsMuted}>
+          <SceneContainer />
+        </Layout>
       }
-    </div>
+    </>
   );
 }
