@@ -2,8 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --size: min(140vw, 140vh);
+@layer base {
+  @font-face {
+    font-family: 'OldEnglishGothicPixel';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/OldEnglishGothicPixelRegular-ow2Bo.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Terminal';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/VT323/VT323-Regular.ttf') format('truetype');
+  }
+
+  :root {
+    --color-primary: #0A0616;
+    --color-secondary: #6327DC;
+    --color-tertiary: #EF7AFF;
+  }
+}
+
+body {
+  cursor: url('/img/icons/mouse.png'), pointer;
+}
+
+a, button, [role="button"] {
+  cursor: url('/img/icons/select.png'), pointer;
 }
 
 .fade-in {
@@ -14,5 +42,14 @@
 @keyframes fadeIn {
   to {
     opacity: 1;
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(110%);
+  }
+  100% {
+    transform: translateX(-110%);
   }
 }

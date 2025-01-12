@@ -37,43 +37,40 @@ export function SceneContainer() {
 
   return (
     <div
-      className="fixed top-0 left-0 flex items-center justify-center"
-      style={{ width: '100vw', height: '100vh' }}
+      className="fixed top-0 left-0 flex items-center justify-center h-full w-full"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      <div className="h-[--size] w-[--size]">
-        <Canvas
-          shadows
-          camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 3, 5] }}
-          style={{ width: '100%', height: '100%' }}
-        >
-          <Suspense fallback={null}>
-            {testing && <Stats />}
-            {testing && <axesHelper args={[2]} />}
-            {testing && <gridHelper args={[10, 10]} />}
+      <Canvas
+        shadows
+        camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 3, 5] }}
+        style={{ width: "100%", height: "100%" }}
+      >
+        <Suspense fallback={null}>
+          {testing && <Stats />}
+          {testing && <axesHelper args={[2]} />}
+          {testing && <gridHelper args={[10, 10]} />}
 
-            <Lights />
+          <Lights />
 
-            <Float speed={1} rotationIntensity={1} floatIntensity={1}>
-              <group ref={botrRef}>
-                <Botr />
-              </group>
-            </Float>
+          <Float speed={1} rotationIntensity={1} floatIntensity={1}>
+            <group ref={botrRef}>
+              <Botr />
+            </group>
+          </Float>
 
-            <OrbitControls
-              enablePan={false}
-              enableRotate={false}
-              enableZoom={true}
-              zoomSpeed={0.5}
-              minDistance={3.5}
-              maxDistance={10}
-            />
-          </Suspense>
-        </Canvas>
-      </div>
+          <OrbitControls
+            enablePan={false}
+            enableRotate={false}
+            enableZoom={true}
+            zoomSpeed={0.5}
+            minDistance={3.5}
+            maxDistance={10}
+          />
+        </Suspense>
+      </Canvas>
     </div>
   );
 }

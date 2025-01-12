@@ -7,9 +7,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xxs': '350px',
+        'xs': '420px',
+      },
+      fontFamily: {
+        'gothic': ['"OldEnglishGothicPixel"', 'sans-serif'],
+        'terminal': ['"Terminal"', 'monospace'],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        tertiary: 'var(--color-tertiary)',
       },
     },
   },
