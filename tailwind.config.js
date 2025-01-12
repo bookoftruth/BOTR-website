@@ -15,11 +15,6 @@ module.exports = {
         'gothic': ['"OldEnglishGothicPixel"', 'sans-serif'],
         'terminal': ['"Terminal"', 'monospace'],
       },
-      colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
-        tertiary: 'var(--color-tertiary)',
-      },
     },
   },
   plugins: [],

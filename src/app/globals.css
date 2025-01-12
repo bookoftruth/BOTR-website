@@ -18,16 +18,10 @@
     font-display: swap;
     src: url('/fonts/VT323/VT323-Regular.ttf') format('truetype');
   }
-
-  :root {
-    --color-primary: #0A0616;
-    --color-secondary: #6327DC;
-    --color-tertiary: #EF7AFF;
-  }
 }
 
-body {
-  cursor: url('/img/icons/mouse.png'), pointer;
+:root {
+  cursor: url('/img/icons/mouse.png'), auto;
 }
 
 a, button, [role="button"] {
@@ -45,11 +39,19 @@ a, button, [role="button"] {
   }
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(110%);
-  }
-  100% {
-    transform: translateX(-110%);
-  }
+.logo {
+  fill: #1d1d1b;
+  font-family: 'OldEnglishGothicPixel';
+  font-size: 56.16px;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  stroke-width: 0.5px;
+}
+
+.text-shadow-black {
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+.text-shadow-white {
+  text-shadow: 0.5px 0.5px 0 #ffffff, -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff;
 }

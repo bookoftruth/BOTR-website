@@ -1,10 +1,47 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, Float, Stats } from '@react-three/drei';
-import { Suspense, useRef } from 'react';
+import { Suspense, useRef, useEffect } from 'react';
+import gsap from 'gsap';
 import Botr from './Botr';
 import Lights from './Lights';
+
+const ResponsiveCanvas = () => {
+  const { camera, gl } = useThree();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      gl.setSize(width, height);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [camera, gl]);
+
+  useEffect(() => {
+    gsap.to(camera.position, {
+      duration: 2,
+      x: 0,
+      y: 3,
+      z: 5,
+      ease: 'power2.inOut',
+      onUpdate: () => {
+        camera.lookAt(0, 0, 0);
+      },
+    });
+  }, [camera]);
+
+  return null;
+};
 
 export function SceneContainer() {
   const testing = false;
@@ -45,7 +82,7 @@ export function SceneContainer() {
     >
       <Canvas
         shadows
-        camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 3, 5] }}
+        camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 3, 10] }}
         style={{ width: "100%", height: "100%" }}
       >
         <Suspense fallback={null}>
@@ -54,6 +91,8 @@ export function SceneContainer() {
           {testing && <gridHelper args={[10, 10]} />}
 
           <Lights />
+
+          <ResponsiveCanvas />
 
           <Float speed={1} rotationIntensity={1} floatIntensity={1}>
             <group ref={botrRef}>
