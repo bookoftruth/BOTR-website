@@ -24,7 +24,7 @@ const Loader = ({ setLoading, enterButton, setEnterButton, setIsMuted }) => {
         muted
         playsInline
         controls={false}
-        className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none z-0"
+        className="absolute left-1/2 top-1/4 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/4 object-cover pointer-events-none z-0"
       >
         <source src="/videos/loading.mp4" type="video/mp4" />
         Your browser does not support the video tag.
