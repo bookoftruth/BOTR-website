@@ -2,7 +2,7 @@
 
 import App from "@/components/App";
 import Loader from "@/components/Loader";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);

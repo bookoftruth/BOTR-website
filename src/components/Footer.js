@@ -1,10 +1,57 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import Image from 'next/image';
+
+const ADDRESS = '73242b77KLvkkUNRQRT3CYNbNFq28dFoy8F2tF6apump';
+
+const socialLinks = [
+  {
+    href: 'https://x.com/bookoftruth_/',
+    icon: '/img/icons/x.png',
+    alt: 'X',
+  },
+  {
+    href: 'https://t.me/bookoftruthcto',
+    icon: '/img/icons/telegram.png',
+    alt: 'Telegram',
+  },
+  {
+    href: 'https://github.com/bookoftruth/Book_of_truth',
+    icon: '/img/icons/github.svg',
+    alt: 'GitHub',
+  },
+  {
+    href: 'https://bookoftruth.gitbook.io/',
+    icon: '/img/icons/gitbook.svg',
+    alt: 'GitBook',
+  },
+  {
+    href: 'https://www.tiktok.com/@book_of_truth_',
+    icon: '/img/icons/tiktok.svg',
+    alt: 'TikTok',
+  },
+  {
+    href: 'https://dexscreener.com/solana/9cnj6rr7chvtertvnfbyckqnkfwnrpbi7djznybdv5pz',
+    icon: '/img/icons/dexscreener.png',
+    alt: 'DEX',
+  },
+];
+
+const SocialLink = ({ href, icon, alt, isTextVisible }) => (
+  <a href={href} target="blank" className="flex items-center">
+    {isTextVisible ? (
+      <span className="text-3xl">{alt}</span>
+    ) : (
+      <div className='transition-transform duration-200 hover:scale-110'>
+        <Image src={icon} alt={alt} width={48} height={48} />
+      </div>
+    )}
+  </a>
+);
 
 const Footer = () => {
   const [copied, setCopied] = useState(false);
-  const ADDRESS = '73242b77KLvkkUNRQRT3CYNbNFq28dFoy8F2tF6apump';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(ADDRESS).then(() => {
@@ -15,111 +62,49 @@ const Footer = () => {
 
   return (
     <div className="fixed bottom-2 flex flex-col gap-1 w-full z-20 text-white text-shadow-black">
-      <div className="flex-row justify-center gap-4 text-3xl  hidden sm:flex">
-        <a href="https://x.com/bookoftruth_/" target="blank">
-          X
-        </a>
-        <a href="https://t.me/bookoftruthcto" target="blank">
-          Telegram
-        </a>
-        <a
-          href="https://github.com/bookoftruth/Book_of_truth"
-          target="blank"
-        >
-          GitHub
-        </a>
-        <a
-          href="https://bookoftruth.gitbook.io/"
-          target="blank"
-        >
-          GitBook
-        </a>
-        <a
-          href="https://www.tiktok.com/@book_of_truth_"
-          target="blank"
-        >
-          TikTok
-        </a>
-        <a
-          href="https://dexscreener.com/solana/9cnj6rr7chvtertvnfbyckqnkfwnrpbi7djznybdv5pz"
-          target="blank"
-        >
-          DEX
-        </a>
+      <div className="hidden sm:flex flex-row justify-center gap-4">
+        {socialLinks.map(({ href, icon, alt }) => (
+          <SocialLink
+            key={href}
+            href={href}
+            icon={icon}
+            alt={alt}
+            isTextVisible
+          />
+        ))}
       </div>
 
-      <div className="flex flex-row justify-center gap-2 sm:hidden">
-        <a href="https://x.com/bookoftruth_/" target="blank">
-          <img
-            src="/img/icons/x.png"
-            alt="x-icon"
-            className="w-12 h-12 transition-transform duration-200 hover:scale-110"
+      <div className="flex sm:hidden flex-row justify-center gap-2">
+        {socialLinks.map(({ href, icon, alt }) => (
+          <SocialLink
+            key={href}
+            href={href}
+            icon={icon}
+            alt={alt}
+            isTextVisible={false}
           />
-        </a>
-        <a href="https://t.me/bookoftruthcto" target="blank">
-          <img
-            src="/img/icons/telegram.png"
-            alt="telegram-icon"
-            className="w-12 h-12 transition-transform duration-200 hover:scale-110"
-          />
-        </a>
-        <a
-          href="https://github.com/bookoftruth/Book_of_truth"
-          target="blank"
-        >
-          <img
-            src="/img/icons/github.svg"
-            alt="github-icon"
-            className="w-12 h-12 transition-transform duration-200 hover:scale-110"
-          />
-        </a>
-        <a
-          href="https://bookoftruth.gitbook.io/"
-          target="blank"
-        >
-          <img
-            src="/img/icons/gitbook.svg"
-            alt="gitbook-icon"
-            className="w-12 h-12 transition-transform duration-200 hover:scale-110"
-          />
-        </a>
-        <a
-          href="https://www.tiktok.com/@book_of_truth_"
-          target="blank"
-        >
-          <img
-            src="/img/icons/tiktok.svg"
-            alt="github-icon"
-            className="w-12 h-12 transition-transform duration-200 hover:scale-110"
-          />
-        </a>
-        <a
-          href="https://dexscreener.com/solana/9cnj6rr7chvtertvnfbyckqnkfwnrpbi7djznybdv5pz"
-          target="blank"
-        >
-          <img
-            src="/img/icons/dexscreener.png"
-            alt="dexscreener-icon"
-            className="w-12 h-12 transition-transform duration-200 hover:scale-110"
-          />
-        </a>
+        ))}
       </div>
 
-      <div className="flex flex-row justify-center items-center gap-2">
+      <div className="flex items-center justify-center mt-4 gap-2">
         <p className="text-center xs:text-xl sm:text-2xl">{ADDRESS}</p>
         <button
           onClick={handleCopy}
-          className={`p-1 bg-white rounded-lg transition-colors flex items-center border border-black ${copied ? "bg-[#899499]" : "hover:bg-gray-200"}`}
+          className={`p-1 bg-white rounded-lg transition-colors flex items-center border border-black ${
+            copied ? "bg-[#899499]" : "hover:bg-gray-200"
+          }`}
         >
-          {copied ? (
-            <img
-              src="/img/icons/copy-filled.svg"
-              alt="Copied"
-              className="w-6 h-6"
+          <div className="w-4 h-4 sm:w-6 sm:h-6">
+            <Image
+              src={
+                copied ? "/img/icons/copy-filled.svg" : "/img/icons/copy.svg"
+              }
+              alt={copied ? "Copied" : "Copy"}
+              width={24}
+              height={24}
+              className="w-full h-full"
             />
-          ) : (
-            <img src="/img/icons/copy.svg" alt="Copy" className="w-4 h-4 sm:w-6 sm:h-6 " />
-          )}
+          </div>
         </button>
       </div>
     </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 
 const Navbar = ({ isMuted, setIsMuted }) => {
   const audioRef = useRef(null);
@@ -39,15 +40,15 @@ const Navbar = ({ isMuted, setIsMuted }) => {
             className="p-1 bg-white text-black rounded-lg shadow-md border border-black hover:bg-gray-200 transition-colors z-20"
           >
             {isMuted ? (
-              <img src="/img/icons/mute.png" alt="Mute" className="w-6 h-6" />
+              <Image src="/img/icons/mute.png" alt="Mute" width={24} height={24} />
             ) : (
-              <img src="/img/icons/sound.png" alt="Sound" className="w-6 h-6" />
+              <Image src="/img/icons/sound.png" alt="Sound" width={24} height={24} />
             )}
           </button>
         </div>
 
         <a className='xl:hidden'>
-          <img src="/img/icons/menu.png" alt="menu" className="w-12 h-12" />
+          <Image src="/img/icons/menu.png" alt="menu" width={48} height={48} />
         </a>
       </div>
     </div>
