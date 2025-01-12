@@ -38,15 +38,13 @@ const socialLinks = [
   },
 ];
 
-const SocialLink = ({ href, icon, alt, isTextVisible }) => (
+const SocialLink = ({ href, icon, alt }) => (
   <a href={href} target="blank" className="flex items-center">
-    {isTextVisible ? (
-      <span className="text-3xl">{alt}</span>
-    ) : (
-      <div className='transition-transform duration-200 hover:scale-110'>
+      <span className="text-3xl hidden sm:block">{alt}</span>
+
+      <div className='block sm:hidden transition-transform duration-200 hover:scale-110'>
         <Image src={icon} alt={alt} width={48} height={48} />
       </div>
-    )}
   </a>
 );
 
@@ -62,26 +60,13 @@ const Footer = () => {
 
   return (
     <div className="fixed bottom-2 flex flex-col gap-1 w-full z-20 text-white text-shadow-black">
-      <div className="hidden sm:flex flex-row justify-center gap-4">
+      <div className="flex flex-row justify-center gap-2 sm:gap-4">
         {socialLinks.map(({ href, icon, alt }) => (
           <SocialLink
             key={href}
             href={href}
             icon={icon}
             alt={alt}
-            isTextVisible
-          />
-        ))}
-      </div>
-
-      <div className="flex sm:hidden flex-row justify-center gap-2">
-        {socialLinks.map(({ href, icon, alt }) => (
-          <SocialLink
-            key={href}
-            href={href}
-            icon={icon}
-            alt={alt}
-            isTextVisible={false}
           />
         ))}
       </div>
@@ -94,17 +79,12 @@ const Footer = () => {
             copied ? "bg-[#899499]" : "hover:bg-gray-200"
           }`}
         >
-          <div className="w-4 h-4 sm:w-6 sm:h-6">
-            <Image
-              src={
-                copied ? "/img/icons/copy-filled.svg" : "/img/icons/copy.svg"
-              }
-              alt={copied ? "Copied" : "Copy"}
-              width={24}
-              height={24}
-              className="w-full h-full"
-            />
-          </div>
+          <Image
+            src={copied ? "/img/icons/copy-filled.svg" : "/img/icons/copy.svg"}
+            alt={copied ? "Copied" : "Copy"}
+            width={16}
+            height={16}
+          />
         </button>
       </div>
     </div>

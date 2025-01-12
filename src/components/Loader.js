@@ -40,7 +40,7 @@ const Loader = ({ setLoading, enterButton, setEnterButton, setIsMuted }) => {
       {enterButton && (
         <button
           onClick={handleEnter}
-          className="px-6 py-3 bg-white text-black text-xl lg:text-3xl font-bold rounded-lg shadow-md hover:bg-gray-200 transition-opacity duration-500 fade-in"
+          className="px-6 py-3 bg-white text-white border border-black text-shadow-black text-xl lg:text-3xl font-bold rounded-lg shadow-md hover:bg-gray-200 transition-opacity duration-500 fade-in"
         >
           Start your quest
         </button>
