@@ -83,7 +83,6 @@ export function SceneContainer() {
       <Canvas
         shadows
         camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 3, 10] }}
-        style={{ width: "100%", height: "100%" }}
       >
         <Suspense fallback={null}>
           {testing && <Stats />}

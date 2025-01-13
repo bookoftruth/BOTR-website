@@ -61,14 +61,13 @@ const Navbar = () => {
       <div className="fixed top-0 h-24 w-full z-20 flex items-center px-4">
         <Link
           href="/"
-          className="text-start font-gothic text-shadow-white text-3xl xl:text-5xl flex-shrink-0 text-black"
+          className="text-start font-gothic text-shadow-white text-3xl sm:text-5xl flex-shrink-0 text-black"
         >
           Book of Truth
         </Link>
 
         <div className="ml-auto flex flex-row gap-6 xs:gap-10 items-center">
-          {/* Desktop Menu */}
-          <nav className="hidden 2xl:flex flex-row justify-center items-center text-3xl text-white text-shadow-black gap-6 xs:gap-10">
+          <nav className="hidden xl:flex flex-row justify-center items-center text-2xl 2xl:text-3xl text-white text-shadow-black gap-6 xs:gap-10">
             {renderLinks()}
           </nav>
 
@@ -84,7 +83,7 @@ const Navbar = () => {
             />
           </button>
 
-          <button onClick={toggleMenu} className="2xl:hidden">
+          <button onClick={toggleMenu} className="xl:hidden">
             <Image
               src="/img/icons/menu.png"
               alt="menu"
@@ -95,13 +94,18 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         ref={menuRef}
-        className={`fixed top-0 right-0 h-full w-full sm:w-64 bg-black text-white shadow-lg transform 2xl:hidden ${
+        className={`fixed top-0 right-0 h-full w-full sm:w-64 bg-black text-white shadow-lg transform xl:hidden ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         } transition-transform duration-300 z-30`}
       >
+        <button
+          onClick={toggleMenu}
+          className="absolute top-4 right-4 text-white text-2xl"
+        >
+          &times;
+        </button>
         <nav className="flex flex-col mt-16 space-y-6 text-2xl">
           {renderLinks(true)}
         </nav>

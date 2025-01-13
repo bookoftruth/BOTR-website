@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 913.1 358.69">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: Old-English-Gothic-Pixel, 'Old English Gothic Pixel';
+        font-size: 250.29px;
+      }
+
+      .cls-2 {
+        font-family: VT323-Regular, VT323;
+        font-size: 119.24px;
+      }
+    </style>
+  </defs>
+  <g id="LABEL">
+    <text class="cls-1" transform="translate(0 219)"><tspan x="0" y="0">Roadmap</tspan></text>
+    <text class="cls-2" transform="translate(6.91 330.08)"><tspan x="0" y="0">The AI meme project</tspan></text>
+  </g>
+</svg>
