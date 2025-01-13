@@ -28,15 +28,20 @@ a, button, [role="button"] {
   cursor: url('/img/cursor/select.png'), pointer;
 }
 
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 1s ease-in forwards;
-}
-
-@keyframes fadeIn {
-  to {
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  20%, 80% {
     opacity: 1;
   }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+.fade-in-out {
+  animation: fadeInOut 3s infinite;
 }
 
 .logo {
@@ -54,8 +59,4 @@ a, button, [role="button"] {
 
 .text-shadow-white {
   text-shadow: 0.5px 0.5px 0 #ffffff, -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff;
-}
-
-.text-shadow-white-2 {
-  text-shadow: 1px 1px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff;
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -15,13 +17,15 @@ const Background = () => (
   </video>
 );
 
-const Layout = ({ children, isMuted, setIsMuted }) => (
-  <>
-    <Navbar isMuted={isMuted} setIsMuted={setIsMuted} />
-    <Background />
-    <main className="relative z-10">{children}</main>
-    <Footer />
-  </>
-);
+const Layout = ({ children, isMuted, setIsMuted }) => {
+  return (
+    <>
+      <Navbar isMuted={isMuted} setIsMuted={setIsMuted} />
+      <Background />
+      <main className="relative z-10">{children}</main>
+      <Footer />
+    </>
+  );
+}
 
 export default Layout;

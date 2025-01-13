@@ -64,7 +64,7 @@ const Navbar = ({ isMuted, setIsMuted }) => {
       <div className="fixed top-0 h-24 w-full z-20 flex items-center px-4">
         <Link
           href="/"
-          className="text-start font-gothic text-shadow-white-2 text-3xl xl:text-5xl flex-shrink-0 text-black"
+          className="text-start font-gothic text-shadow-white text-3xl xl:text-5xl flex-shrink-0 text-black"
         >
           Book of Truth
         </Link>

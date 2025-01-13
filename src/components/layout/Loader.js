@@ -2,17 +2,18 @@
 
 import { useEffect } from "react";
 
-const Loader = ({ setLoading, enterButton, setEnterButton, setIsMuted }) => {
+const Loader = ({ setLoading, alreadyEntered, setAlreadyEntered, enterButton, setEnterButton, setIsMuted }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setEnterButton(true);
-    }, 5000);
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [setEnterButton]);
+  }, [setEnterButton, setAlreadyEntered]);
 
   const handleEnter = () => {
     setLoading(false);
+    setAlreadyEntered(true);
     setIsMuted(false);
   };
 
@@ -40,7 +41,7 @@ const Loader = ({ setLoading, enterButton, setEnterButton, setIsMuted }) => {
       {enterButton && (
         <button
           onClick={handleEnter}
-          className="px-6 py-3 bg-white text-white border border-black text-shadow-black text-xl xs:text-3xl font-bold rounded-lg shadow-md hover:bg-gray-200 transition-opacity duration-500 fade-in"
+          className="text-white text-shadow-black text-xl xxs:text-2xl xs:text-3xl sm:text-6xl font-bold fade-in-out"
         >
           Start your quest
         </button>

@@ -2,10 +2,10 @@
 
 import Layout from "@/components/layout/Layout";
 import Reader from "@/components/reader/Reader";
-import { useState } from "react";
+import { useGlobalState } from "@/context/GlobalStateContext";
 
 export default function ReaderPage() {
-  const [isMuted, setIsMuted] = useState(true);
+  const { isMuted, setIsMuted } = useGlobalState();
 
   return (
     <Layout isMuted={isMuted} setIsMuted={setIsMuted}>
