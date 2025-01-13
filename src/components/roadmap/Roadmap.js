@@ -45,11 +45,20 @@ const Roadmap = () => {
   ];
 
   return (
-    <div className="h-full py-32 px-6 lg:px-20 text-shadow-white">
+    <div className="h-full w-full max-w-[1350px] py-32 px-6 lg:px-20 text-shadow-white">
       <div className="space-y-12">
         {phases.map((phase, index) => (
-          <div key={index} className="p-6 rounded-lg backdrop-blur bg-white/30 shadow-xl">
-            <h2 className="text-2xl lg:text-3xl font-semibold mb-4">{phase.title}</h2>
+          <div
+            key={index}
+            className="p-6 rounded-lg backdrop-blur bg-white/30 shadow-xl"
+            style={{
+              border: "1.25px solid",
+              borderImage: "linear-gradient(to bottom, #D02E95, #F38E4B) 1",
+            }}
+          >
+            <h2 className="text-2xl lg:text-3xl font-semibold mb-4">
+              {phase.title}
+            </h2>
             <p className="text-lg lg:text-xl leading-relaxed whitespace-pre-line">
               {phase.description}
             </p>

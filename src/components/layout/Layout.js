@@ -9,7 +9,7 @@ const Background = ({ backgroundType }) => {
     return (
       <div className="absolute top-0 left-0 w-screen h-screen z-0">
         <Image
-          src="/img/roadmap_background.png"
+          src="/img/roadmap/roadmap_background.png"
           alt="Static Background"
           layout="fill"
           objectFit="cover"

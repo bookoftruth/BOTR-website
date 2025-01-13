@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useGlobalState } from "@/context/GlobalStateContext";
 
 const Navbar = ({ backgroundType }) => {
-  const { isMuted, setIsMuted } = useGlobalState();
+  const { isMuted, setIsMuted, setAlreadyEntered } = useGlobalState();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -29,8 +29,8 @@ const Navbar = ({ backgroundType }) => {
 
   const links = [
     { href: "/", label: "Book of Truth" },
-    { href: "/reader", label: "The Reader" },
     { href: "/roadmap", label: "Roadmap" },
+    { href: "/reader", label: "The Reader" },
     { href: "/pfp-editor", label: "PFP Editor" },
     { href: "/store", label: "Merch Store" },
   ];
@@ -42,7 +42,10 @@ const Navbar = ({ backgroundType }) => {
       <Link
         key={href}
         href={href}
-        onClick={isMobile ? () => setMenuOpen(false) : undefined}
+        onClick={() => {
+          if (isMobile) setMenuOpen(false);
+          setAlreadyEntered(true);
+        }}
         className={`block px-4 py-2 ${
           pathname === href
             ? isMobile
@@ -68,11 +71,12 @@ const Navbar = ({ backgroundType }) => {
       >
         <Link
           href="/"
+          onClick={() => setAlreadyEntered(true)}
           className="text-start font-gothic text-shadow-white-2 text-3xl sm:text-5xl flex-shrink-0 text-black"
         >
           {activeLabel === "Roadmap" ? (
               <Image
-                src="/img/roadmap.png"
+                src="/img/roadmap/roadmap.png"
                 alt="Roadmap"
                 width={935}
                 height={272}
