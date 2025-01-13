@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useGlobalState } from "@/context/GlobalStateContext";
 
-const Navbar = () => {
+const Navbar = ({ backgroundType }) => {
   const { isMuted, setIsMuted } = useGlobalState();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -58,7 +58,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="fixed top-0 h-24 w-full z-20 flex items-center px-4">
+      <div className={`fixed top-0 h-24 w-full z-20 flex items-center px-4 ${backgroundType === 'dynamic' ? '' : 'backdrop-blur bg-black/30 shadow-lg'}`}>
         <Link
           href="/"
           className="text-start font-gothic text-shadow-white text-3xl sm:text-5xl flex-shrink-0 text-black"

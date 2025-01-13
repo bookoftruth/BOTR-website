@@ -2,28 +2,43 @@
 
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Image from "next/image";
 
-const Background = () => (
-  <video
-    autoPlay
-    loop
-    muted
-    playsInline
-    controls={false}
-    className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none z-0"
-  >
-    <source src="/videos/background.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-);
+const Background = ({ backgroundType }) => {
+  if (backgroundType === "dynamic") {
+    return (
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none z-0"
+      >
+        <source src="/videos/background.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    );
+  } else {
+    return (
+      <Image
+        src="/img/roadmap_background.png"
+        alt="Static Background"
+        layout="fill"
+        objectFit="cover"
+        className="pointer-events-none z-0"
+      />
+    );
+  }
+};
 
-const Layout = ({ children, isMuted, setIsMuted }) => {
+const Layout = ({ children, backgroundType }) => {
   return (
     <>
-      <Navbar isMuted={isMuted} setIsMuted={setIsMuted} />
-      <Background />
+      <Navbar backgroundType={backgroundType} />
+      <Background backgroundType={backgroundType} />
       <main className="relative z-10">{children}</main>
-      <Footer />
+      <Footer backgroundType={backgroundType}/>
     </>
   );
 }
