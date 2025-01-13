@@ -24,6 +24,11 @@
   cursor: url('/img/cursor/mouse.png'), auto;
 }
 
+html,
+body {
+  background-color: black;
+}
+
 a, button, [role="button"] {
   cursor: url('/img/cursor/select.png'), pointer;
 }

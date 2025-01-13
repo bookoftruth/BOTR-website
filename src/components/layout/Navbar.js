@@ -1,20 +1,17 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useGlobalState } from "@/context/GlobalStateContext";
 
-const Navbar = ({ isMuted, setIsMuted }) => {
-  const audioRef = useRef(null);
+const Navbar = () => {
+  const { isMuted, setIsMuted } = useGlobalState();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMute = () => setIsMuted(!isMuted);
-
-  useEffect(() => {
-    if (audioRef.current) audioRef.current.muted = isMuted;
-  }, [isMuted]);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -70,8 +67,6 @@ const Navbar = ({ isMuted, setIsMuted }) => {
         </Link>
 
         <div className="ml-auto flex flex-row gap-6 xs:gap-10 items-center">
-          <audio ref={audioRef} src="/music/music.mp3" autoPlay loop />
-
           {/* Desktop Menu */}
           <nav className="hidden 2xl:flex flex-row justify-center items-center text-3xl text-white text-shadow-black gap-6 xs:gap-10">
             {renderLinks()}
@@ -89,7 +84,6 @@ const Navbar = ({ isMuted, setIsMuted }) => {
             />
           </button>
 
-          {/* Mobile Menu Button */}
           <button onClick={toggleMenu} className="2xl:hidden">
             <Image
               src="/img/icons/menu.png"

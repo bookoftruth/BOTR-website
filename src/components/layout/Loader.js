@@ -2,17 +2,16 @@
 
 import { useEffect } from "react";
 
-const Loader = ({ setLoading, alreadyEntered, setAlreadyEntered, enterButton, setEnterButton, setIsMuted }) => {
+const Loader = ({ loading, setLoading, setAlreadyEntered, setIsMuted }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      setEnterButton(true);
-    }, 2000);
+      setLoading(false);
+    }, 1000);
 
     return () => clearTimeout(timer);
-  }, [setEnterButton, setAlreadyEntered]);
+  }, [setLoading]);
 
   const handleEnter = () => {
-    setLoading(false);
     setAlreadyEntered(true);
     setIsMuted(false);
   };
@@ -32,16 +31,16 @@ const Loader = ({ setLoading, alreadyEntered, setAlreadyEntered, enterButton, se
       </video>
 
 
-      {!enterButton && (
+      {loading && (
         <div className="flex items-center justify-center">
           <div className="w-24 h-24 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 
-      {enterButton && (
+      {!loading && (
         <button
           onClick={handleEnter}
-          className="text-white text-shadow-black text-xl xxs:text-2xl xs:text-3xl sm:text-6xl font-bold fade-in-out"
+          className="text-white text-shadow-black text-xl xxs:text-2xl xs:text-3xl sm:text-4xl font-bold fade-in-out"
         >
           Start your quest
         </button>

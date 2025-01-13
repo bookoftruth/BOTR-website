@@ -8,18 +8,15 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [enterButton, setEnterButton] = useState(false);
   const { alreadyEntered, setAlreadyEntered, isMuted, setIsMuted } = useGlobalState();
 
   return (
     <>
-      {loading && !alreadyEntered ? 
+      {!alreadyEntered ? 
         <Loader
+          loading={loading}
           setLoading={setLoading}
-          alreadyEntered={alreadyEntered} 
-          setAlreadyEntered={setAlreadyEntered}  
-          enterButton={enterButton} 
-          setEnterButton={setEnterButton} 
+          setAlreadyEntered={setAlreadyEntered}
           setIsMuted={setIsMuted}
         />
         : 

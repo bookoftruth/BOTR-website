@@ -60,7 +60,7 @@ const Footer = () => {
 
   return (
     <div className="fixed bottom-2 flex flex-col gap-1 w-full z-20 text-white text-shadow-black">
-      <div className="flex flex-row justify-center gap-2 sm:gap-4">
+      <div className="flex flex-row justify-center gap-2 xs:gap-4 md:gap-10 hover:text-gray-200">
         {socialLinks.map(({ href, icon, alt }) => (
           <SocialLink
             key={href}
