@@ -6,7 +6,7 @@ import { useGlobalState } from "@/context/GlobalStateContext";
 const Loader = () => {
   const [loading, setLoading] = useState(true);
   const [zoomingIn, setZoomingIn] = useState(false);
-  const { alreadyEntered, setAlreadyEntered, setIsMuted } = useGlobalState();
+  const { alreadyEntered, setAlreadyEntered, setIsMuted, setIsPlaying } = useGlobalState();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,6 +22,7 @@ const Loader = () => {
     setTimeout(() => {
       setAlreadyEntered(true);
       setIsMuted(false);
+      setIsPlaying(true);
     }, 1000);
   };
 
