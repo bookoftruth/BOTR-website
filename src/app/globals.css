@@ -63,5 +63,9 @@ a, button, [role="button"] {
 }
 
 .text-shadow-white {
+  text-shadow: 1px 1px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff;
+}
+
+.text-shadow-white-2 {
   text-shadow: 0.5px 0.5px 0 #ffffff, -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff;
 }

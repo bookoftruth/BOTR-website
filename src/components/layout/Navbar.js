@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useGlobalState } from "@/context/GlobalStateContext";
 
 const Navbar = ({ backgroundType }) => {
@@ -12,7 +12,6 @@ const Navbar = ({ backgroundType }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMute = () => setIsMuted(!isMuted);
-
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   const menuRef = useRef();
@@ -24,17 +23,19 @@ const Navbar = ({ backgroundType }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const links = [
-    { href: '/', label: 'Book of Truth' },
-    { href: '/roadmap', label: 'Roadmap' },
-    { href: '/reader', label: 'The Reader' },
-    { href: '/pfp-editor', label: 'PFP Editor' },
-    { href: '/store', label: 'Merch Store' },
+    { href: "/", label: "Book of Truth" },
+    { href: "/reader", label: "The Reader" },
+    { href: "/roadmap", label: "Roadmap" },
+    { href: "/pfp-editor", label: "PFP Editor" },
+    { href: "/store", label: "Merch Store" },
   ];
+
+  const activeLabel = links.find((link) => link.href === pathname)?.label || "Book of Truth";
 
   const renderLinks = (isMobile = false) =>
     links.map(({ href, label }) => (
@@ -45,11 +46,11 @@ const Navbar = ({ backgroundType }) => {
         className={`block px-4 py-2 ${
           pathname === href
             ? isMobile
-              ? 'text-black bg-gray-200'
-              : 'underline'
+              ? "text-black bg-gray-200"
+              : "underline"
             : isMobile
-            ? 'hover:text-gray-200'
-            : 'text-white hover:text-gray-200'
+            ? "hover:text-gray-200"
+            : "text-white hover:text-gray-200"
         }`}
       >
         {label}
@@ -58,12 +59,28 @@ const Navbar = ({ backgroundType }) => {
 
   return (
     <>
-      <div className={`fixed top-0 h-24 w-full z-20 flex items-center px-4 ${backgroundType === 'roadmap' ? 'backdrop-blur bg-black/30 shadow-lg' : ''}`}>
+      <div
+        className={`fixed top-0 h-24 w-full z-20 flex items-center px-4 ${
+          backgroundType === "roadmap"
+            ? "backdrop-blur bg-black/30 shadow-lg"
+            : ""
+        }`}
+      >
         <Link
           href="/"
-          className="text-start font-gothic text-shadow-white text-3xl sm:text-5xl flex-shrink-0 text-black"
+          className="text-start font-gothic text-shadow-white-2 text-3xl sm:text-5xl flex-shrink-0 text-black"
         >
-          Book of Truth
+          {activeLabel === "Roadmap" ? (
+              <Image
+                src="/img/roadmap.png"
+                alt="Roadmap"
+                width={935}
+                height={272}
+                className="h-8 mt-1 sm:h-14 w-auto"
+              />
+          ) : (
+            activeLabel
+          )}
         </Link>
 
         <div className="ml-auto flex flex-row gap-6 xs:gap-10 items-center">
@@ -76,8 +93,8 @@ const Navbar = ({ backgroundType }) => {
             className="p-1 bg-white text-black rounded-lg shadow-md border border-black hover:bg-gray-200 transition-colors z-20"
           >
             <Image
-              src={`/img/icons/${isMuted ? 'mute' : 'sound'}.png`}
-              alt={isMuted ? 'Mute' : 'Sound'}
+              src={`/img/icons/${isMuted ? "mute" : "sound"}.png`}
+              alt={isMuted ? "Mute" : "Sound"}
               width={16}
               height={16}
             />
@@ -97,7 +114,7 @@ const Navbar = ({ backgroundType }) => {
       <div
         ref={menuRef}
         className={`fixed top-0 right-0 h-full w-full sm:w-64 bg-black text-white shadow-lg transform xl:hidden ${
-          menuOpen ? 'translate-x-0' : 'translate-x-full'
+          menuOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 z-30`}
       >
         <button

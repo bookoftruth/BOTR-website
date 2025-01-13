@@ -5,8 +5,10 @@ import Roadmap from "@/components/roadmap/Roadmap";
 
 export default function RoadmapPage() {
   return (
-    <Layout backgroundType="roadmap">
-      <Roadmap />
-    </Layout>
+    <div className="h-full w-full overflow-auto">
+      <Layout backgroundType="roadmap">
+        <Roadmap />
+      </Layout>
+    </div>
   );
 }

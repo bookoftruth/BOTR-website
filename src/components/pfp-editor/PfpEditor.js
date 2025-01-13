@@ -1,6 +1,9 @@
+import Soon from "../layout/Soon";
+
 const PfpEditor = () => {
   return (
     <>
+      <Soon />
     </>
   );
 }

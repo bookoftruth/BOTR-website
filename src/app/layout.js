@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <GlobalStateProvider>
-          <div className="fixed h-screen w-screen overflow-hidden font-terminal">
+          <div className="h-screen w-screen overflow-auto font-terminal">
             <AudioPlayer />
             {children}
           </div>

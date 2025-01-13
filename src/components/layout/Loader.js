@@ -1,10 +1,12 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import { useGlobalState } from "@/context/GlobalStateContext";
 
-const Loader = ({ loading, setLoading, setAlreadyEntered, setIsMuted }) => {
+const Loader = () => {
+  const [loading, setLoading] = useState(true);
   const [zoomingIn, setZoomingIn] = useState(false);
-  const [zoomComplete, setZoomComplete] = useState(false);
+  const { alreadyEntered, setAlreadyEntered, setIsMuted } = useGlobalState();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,18 +18,12 @@ const Loader = ({ loading, setLoading, setAlreadyEntered, setIsMuted }) => {
 
   const handleEnter = () => {
     setZoomingIn(true);
-    setIsMuted(false);
-
+    
     setTimeout(() => {
-      setZoomComplete(true);
+      setAlreadyEntered(true);
+      setIsMuted(false);
     }, 1000);
   };
-
-  useEffect(() => {
-    if (zoomComplete) {
-      setAlreadyEntered(true);
-    }
-  }, [zoomComplete, setAlreadyEntered]);
 
   return (
     <button
@@ -46,23 +42,16 @@ const Loader = ({ loading, setLoading, setAlreadyEntered, setIsMuted }) => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Spinner while loading */}
-      {loading && !zoomComplete && (
+      {loading && !alreadyEntered && (
         <div className="flex items-center justify-center">
           <div className="w-24 h-24 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
 
-      {/* Text after loading finishes */}
-      {!loading && !zoomComplete && (
+      {!loading && !alreadyEntered && (
         <div className="text-white text-shadow-black text-xl xxs:text-2xl xs:text-3xl sm:text-4xl font-bold fade-in-out">
           Start your quest
         </div>
-      )}
-
-      {/* This will cover the screen with white after zoom is complete */}
-      {zoomComplete && (
-        <div className="absolute inset-0 bg-white z-10"></div>
       )}
     </button>
   );

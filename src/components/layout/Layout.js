@@ -7,13 +7,15 @@ import Image from "next/image";
 const Background = ({ backgroundType }) => {
   if (backgroundType === "roadmap") {
     return (
-      <Image
-        src="/img/roadmap_background.png"
-        alt="Static Background"
-        layout="fill"
-        objectFit="cover"
-        className="pointer-events-none z-0"
-      />
+      <div className="absolute top-0 left-0 w-screen h-screen z-0">
+        <Image
+          src="/img/roadmap_background.png"
+          alt="Static Background"
+          layout="fill"
+          objectFit="cover"
+          className="pointer-events-none z-0"
+        />
+      </div>
     );
   } else {
     return (
@@ -23,7 +25,7 @@ const Background = ({ backgroundType }) => {
         muted
         playsInline
         controls={false}
-        className="absolute top-1/2 left-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none z-0"
+        className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none z-0"
       >
         <source src="/videos/background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
