@@ -20,7 +20,7 @@ export default function Home() {
           setIsMuted={setIsMuted}
         />
         : 
-        <Layout backgroundType="dynamic">
+        <Layout>
           <SceneContainer />
         </Layout>
       }

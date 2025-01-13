@@ -5,7 +5,7 @@ import Roadmap from "@/components/roadmap/Roadmap";
 
 export default function RoadmapPage() {
   return (
-    <Layout>
+    <Layout backgroundType="roadmap">
       <Roadmap />
     </Layout>
   );

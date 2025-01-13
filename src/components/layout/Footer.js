@@ -59,7 +59,7 @@ const Footer = ({ backgroundType }) => {
   };
 
   return (
-    <div className={`fixed py-2 bottom-0 flex flex-col gap-1 w-full z-20 text-white text-shadow-black ${backgroundType === 'dynamic' ? '' : 'backdrop-blur bg-black/30 shadow-lg'}`}>
+    <div className={`fixed py-2 bottom-0 flex flex-col gap-1 w-full z-20 text-white text-shadow-black ${backgroundType === 'roadmap' ? 'backdrop-blur bg-black/30 shadow-lg' : ''}`}>
       <div className="flex flex-row justify-center gap-2 xs:gap-4 md:gap-10 hover:text-gray-200">
         {socialLinks.map(({ href, icon, alt }) => (
           <SocialLink

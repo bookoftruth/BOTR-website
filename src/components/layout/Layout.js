@@ -5,7 +5,17 @@ import Footer from "./Footer";
 import Image from "next/image";
 
 const Background = ({ backgroundType }) => {
-  if (backgroundType === "dynamic") {
+  if (backgroundType === "roadmap") {
+    return (
+      <Image
+        src="/img/roadmap_background.png"
+        alt="Static Background"
+        layout="fill"
+        objectFit="cover"
+        className="pointer-events-none z-0"
+      />
+    );
+  } else {
     return (
       <video
         autoPlay
@@ -18,16 +28,6 @@ const Background = ({ backgroundType }) => {
         <source src="/videos/background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
-    );
-  } else {
-    return (
-      <Image
-        src="/img/roadmap_background.png"
-        alt="Static Background"
-        layout="fill"
-        objectFit="cover"
-        className="pointer-events-none z-0"
-      />
     );
   }
 };
