@@ -28,7 +28,7 @@ const Roadmap = () => {
     {
       title: "Phase 6: Signature & Branding",
       description: `Each meme gets a unique identity:
-      #00001 A signature that ensures exclusivity and recognition. These signatures will then add value for the next stages. All the images generated will also be able to be added to the book and be engraved in his history.`,
+      𝕭𝖔𝖔𝖐 𝖔𝖋 𝕿𝖗𝖚𝖙𝖍 - 𝔭𝔞𝔤𝔢 #00001 A signature that ensures exclusivity and recognition. These signatures will then add value for the next stages. All the images generated will also be able to be added to the book and be engraved in his history.`,
     },
     {
       title: "Phase 7: NFT Minting and Marketplace",
