@@ -18,6 +18,7 @@ const Background = ({ backgroundType }) => {
       </div>
     );
   } else {
+    const src = (backgroundType === "soon") ? "/videos/background_soon.mp4" : "/videos/background.mp4";
     return (
       <video
         autoPlay
@@ -27,7 +28,7 @@ const Background = ({ backgroundType }) => {
         controls={false}
         className="absolute top-1/2 left-1/2 w-full h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none z-0"
       >
-        <source src="/videos/background.mp4" type="video/mp4" />
+        <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     );

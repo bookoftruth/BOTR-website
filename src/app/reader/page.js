@@ -5,7 +5,7 @@ import Reader from "@/components/reader/Reader";
 
 export default function ReaderPage() {
   return (
-    <Layout>
+    <Layout backgroundType="soon">
       <Reader />
     </Layout>
   );

@@ -30,8 +30,8 @@ const Navbar = ({ backgroundType }) => {
   const links = [
     { href: "/", label: "Book of Truth" },
     { href: "/roadmap", label: "Roadmap" },
-    { href: "/reader", label: "The Reader" },
     { href: "/pfp-editor", label: "PFP Editor" },
+    { href: "/reader", label: "The Reader" },
     { href: "/store", label: "Merch Store" },
   ];
 
@@ -64,7 +64,7 @@ const Navbar = ({ backgroundType }) => {
     <>
       <div
         className={`fixed top-0 h-24 w-full z-20 flex items-center px-4 ${
-          backgroundType === "roadmap"
+          backgroundType === "roadmap" || backgroundType === "soon"
             ? "backdrop-blur bg-black/30 shadow-lg"
             : ""
         }`}

@@ -61,7 +61,7 @@ const Footer = ({ backgroundType }) => {
   return (
     <div
       className={`fixed h-24 bottom-0 flex flex-col justify-center items-center sm:gap-1 w-full z-20 text-white text-shadow-black ${
-        backgroundType === "roadmap"
+        backgroundType === "roadmap" || backgroundType === "soon"
           ? "backdrop-blur bg-black/30 shadow-lg"
           : ""
       }`}

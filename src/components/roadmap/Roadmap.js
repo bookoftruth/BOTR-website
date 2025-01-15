@@ -52,7 +52,7 @@ const Roadmap = () => {
             key={index}
             className="p-6 rounded-lg backdrop-blur bg-white/30 shadow-xl"
             style={{
-              border: "1.25px solid",
+              border: "2.5px solid",
               borderImage: "linear-gradient(to bottom, #D02E95, #F38E4B) 1",
             }}
           >
