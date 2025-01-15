@@ -38,12 +38,24 @@ const socialLinks = [
   },
 ];
 
-const SocialLink = ({ href, icon, alt }) => (
-  <a href={href} target="blank" className="flex items-center">
-      <span className="text-3xl hidden sm:block">{alt}</span>
+const SocialLink = ({ backgroundType, href, icon, alt }) => (
+  <a href={href} target="blank" className={`flex items-center ${
+    backgroundType === "editor"
+      ? "flex-col-reverse"
+      : ""
+  }`}>
+      <span className={`text-3xl ${
+              backgroundType === "editor"
+                ? "text-xl"
+                : "hidden sm:block"
+            }`}>{alt}</span>
 
-      <div className='block sm:hidden transition-transform duration-200 hover:scale-110'>
-        <Image src={icon} alt={alt} width={36} height={36} />
+      <div className={` ${
+              backgroundType === "editor"
+                ? ""
+                : "block sm:hidden transition-transform duration-200 hover:scale-110"
+            }`}>
+        <Image src={icon} alt={alt} width={48} height={48} />
       </div>
   </a>
 );
@@ -59,36 +71,58 @@ const Footer = ({ backgroundType }) => {
   };
 
   return (
-    <div
-      className={`fixed h-24 bottom-0 flex flex-col justify-center items-center sm:gap-1 w-full z-20 text-white text-shadow-black ${
-        backgroundType === "roadmap" || backgroundType === "soon"
-          ? "backdrop-blur bg-black/30 shadow-lg"
-          : ""
-      }`}
-    >
-      <div className="flex flex-row justify-center gap-2 xs:gap-4 md:gap-10 hover:text-gray-200">
-        {socialLinks.map(({ href, icon, alt }) => (
-          <SocialLink key={href} href={href} icon={icon} alt={alt} />
-        ))}
-      </div>
+    <>
+      {backgroundType === "editor" ? (
+        <>
+          <div
+            className="fixed h-24 bottom-0 flex flex-col justify-center ml-5 w-full z-20 text-white text-shadow-black"
+          >
+            <div className="flex flex-row gap-10 hover:text-gray-200">
+              {socialLinks.map(({ href, icon, alt }) => (
+                <SocialLink backgroundType={"editor"} key={href} href={href} icon={icon} alt={alt} />
+              ))}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div
+            className={`fixed h-24 bottom-0 flex flex-col justify-center items-center sm:gap-1 w-full z-20 text-white text-shadow-black ${
+              backgroundType === "roadmap" || backgroundType === "soon"
+                ? "backdrop-blur bg-black/30 shadow-lg"
+                : ""
+            }`}
+          >
+            <div className="flex flex-row justify-center gap-2 xs:gap-4 md:gap-10 hover:text-gray-200">
+              {socialLinks.map(({ href, icon, alt }) => (
+                <SocialLink backgroundType={backgroundType} key={href} href={href} icon={icon} alt={alt} />
+              ))}
+            </div>
 
-      <div className="flex items-center justify-center mt-4 gap-2">
-        <p className="text-center xs:text-xl sm:text-2xl">{ADDRESS}</p>
-        <button
-          onClick={handleCopy}
-          className={`p-1 bg-white rounded-lg transition-colors flex items-center border border-black ${
-            copied ? "bg-[#899499]" : "hover:bg-gray-200"
-          }`}
-        >
-          <Image
-            src={copied ? "/img/icons/copy-filled.svg" : "/img/icons/copy.svg"}
-            alt={copied ? "Copied" : "Copy"}
-            width={16}
-            height={16}
-          />
-        </button>
-      </div>
-    </div>
+            <div className="flex items-center justify-center mt-4 gap-2">
+              <p className="text-center xs:text-xl sm:text-2xl">{ADDRESS}</p>
+              <button
+                onClick={handleCopy}
+                className={`p-1 bg-white rounded-lg transition-colors flex items-center border border-black ${
+                  copied ? "bg-[#899499]" : "hover:bg-gray-200"
+                }`}
+              >
+                <Image
+                  src={
+                    copied
+                      ? "/img/icons/copy-filled.svg"
+                      : "/img/icons/copy.svg"
+                  }
+                  alt={copied ? "Copied" : "Copy"}
+                  width={16}
+                  height={16}
+                />
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 

@@ -22,15 +22,9 @@
 
 :root {
   --size: min(100vw, 100vh);
-  --sizeBotr: calc(var(--size) * 0.5);
-  --widthDrag: calc(var(--size) * 0.226);
-  --heightDrag: calc(var(--size) * 0.252);
-  --positionDragX: calc(var(--size) * 0.098);
-  --positionDragY: calc(var(--size) * 0.042);
-  --widthImage: calc(var(--size) * 0.232);
-  --heightImage: calc(var(--size) * 0.27);
-  --positionImageX: calc(var(--size) * 0.095);
-  --positionImageY: calc(var(--size) * 0.03);
+  --size-botr: calc(var(--size) * 0.5);
+  --positionImageX: calc(var(--size-botr) * 0.095);
+  --positionImageY: calc(var(--size-botr) * 0.03);
   cursor: url('/img/cursor/mouse.png'), auto;
 }
 
@@ -81,6 +75,23 @@ a, button, [role="button"] {
 }
 
 .size-book {
-  width: calc(var(--size) * 0.5);
-  height: calc(var(--size) * 0.5);
+  width: calc(var(--size-botr) * 0.5);
+  height: calc(var(--size-botr) * 0.5);
+}
+
+.drag-upload {
+  position: absolute;
+  left: calc(var(--size-botr) * 0.098);
+  top: calc(var(--size-botr) * 0.042);
+  width: 69%;
+  height: 76.5%;
+}
+
+.profile-picture {
+  position: absolute;
+  width: 70%;
+  height: 80%;
+  left: calc(var(--size-botr) * 0.095);
+  top: calc(var(--size-botr) * 0.03);
+  object-fit: cover;
 }
