@@ -98,7 +98,7 @@ const PfpEditor = () => {
   const [isBlack, setIsBlack] = useState(false);
 
   return (
-      <div className='relative p-24 flex flex-col items-center justify-center h-screen w-screen top-1/2'>
+      <div className='relative p-24 flex flex-col items-center justify-center h-screen w-screen top-1/2 font-windows'>
         <div className='relative border-4 border-white w-1/2 h-1/2 items-center justify-center flex'>
           <div className='absolute top-0 w-full h-5 bg-[#060087] z-10 items-center flex flex-row gap-1'>
             <Image

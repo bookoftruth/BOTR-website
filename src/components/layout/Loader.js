@@ -16,6 +16,17 @@ const Loader = () => {
     return () => clearTimeout(timer);
   }, [setLoading]);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (!loading && (event.key === 'Enter' || event.key === ' ')) {
+        handleEnter();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [loading]);
+
   const handleEnter = () => {
     setZoomingIn(true);
     

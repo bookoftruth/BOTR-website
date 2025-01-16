@@ -18,6 +18,14 @@
     font-display: swap;
     src: url('/fonts/VT323/VT323-Regular.ttf') format('truetype');
   }
+
+  @font-face {
+    font-family: 'Windows';
+    font-style: normal;
+    font-weight: normal;
+    font-display: swap;
+    src: url('/fonts/W95FA.otf') format('opentype');
+  }
 }
 
 :root {

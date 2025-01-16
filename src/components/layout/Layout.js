@@ -25,9 +25,8 @@ const Background = ({ backgroundType }) => {
     if (backgroundType === "roadmap") {
       src="/img/roadmap/roadmap_background.png";
     } else {
-      const randomNumber = Math.floor(Math.random() * 16) + 1;
-      const fileExtension = randomNumber === 5 || randomNumber === 11 ? "jpg" : "gif";
-      src = `/img/pfp-editor/backgrounds/${randomNumber}.${fileExtension}`;
+      const randomNumber = Math.floor(Math.random() * 28) + 1;
+      src = `/img/pfp-editor/backgrounds/${randomNumber}.gif`;
     }
     return (
       <div className="absolute top-0 left-0 w-screen h-screen z-0">

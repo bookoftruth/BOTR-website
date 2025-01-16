@@ -14,6 +14,7 @@ module.exports = {
       fontFamily: {
         'gothic': ['"OldEnglishGothicPixel"', 'sans-serif'],
         'terminal': ['"Terminal"', 'monospace'],
+        'windows' : ['"Windows"', 'sans-serif'],
       },
     },
   },
