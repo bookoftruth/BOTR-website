@@ -59,7 +59,7 @@ const ProfilePicture = ({isBlack}) => {
         draggable={false}
       />
 
-      {profilePicture ? null : (
+      {!profilePicture && (
         <div
           className={`drag-upload border-4 border-dashed ${
             dragging ? "border-blue-500 bg-blue-500/10" : "border-white/50"
@@ -81,7 +81,7 @@ const ProfilePicture = ({isBlack}) => {
         </div>
       )}
 
-      {profilePicture ? (
+      {profilePicture && (
           <Image
             src={profilePicture}
             alt="Profile"
@@ -89,7 +89,7 @@ const ProfilePicture = ({isBlack}) => {
             height={3464}
             className="profile-picture"
           />
-      ) : null}
+      )}
     </div>
   );
 };
@@ -98,41 +98,40 @@ const PfpEditor = () => {
   const [isBlack, setIsBlack] = useState(false);
 
   return (
-      <div className='relative p-24 flex flex-col items-center justify-center h-screen w-screen top-1/2 font-windows'>
-        <div className='relative border-4 border-white w-1/2 h-1/2 items-center justify-center flex'>
-          <div className='absolute top-0 w-full h-5 bg-[#060087] z-10 items-center flex flex-row gap-1'>
-            <Image
-                src="/img/pfp-editor/icons/paint.png"
-                alt="Paint Logo"
-                width={250}
-                height={250}
-                className='h-4 w-auto ml-0.5'
-            />
-            <div className='text-white'>untitled - Paint</div>
-            <Image
-                src="/img/pfp-editor/window-controls.png"
-                alt="Window Controls"
-                width={1701}
-                height={527}
-                className='h-full w-auto ml-auto'
-            />
-          </div>
+    <div className="relative p-24 flex flex-col items-center justify-center h-screen w-screen top-1/2 font-windows">
+      <div className="relative border-4 border-white w-1/2 h-1/2 items-center justify-center flex">
+        <div className="absolute top-0 w-full h-5 bg-[#060087] z-10 items-center flex flex-row gap-1">
           <Image
-              src="/img/pfp-editor/png.png"
-              alt="PNG Background"
-              layout="fill"
-              objectFit="cover"
+            src="/img/pfp-editor/icons/paint.png"
+            alt="Paint Logo"
+            width={250}
+            height={250}
+            className="h-4 w-auto ml-0.5"
           />
-          <button
-            onClick={() => setIsBlack(!isBlack)}
-            className="p-2 bg-blue-500 text-white rounded-lg z-10"
-          >
-            Toggle Image
-          </button>
-          <ProfilePicture isBlack={isBlack} />
+          <div className="text-white">untitled - Paint</div>
+          <Image
+            src="/img/pfp-editor/window-controls.png"
+            alt="Window Controls"
+            width={1701}
+            height={527}
+            className="h-full w-auto ml-auto"
+          />
         </div>
-
+        <Image
+          src="/img/pfp-editor/png.png"
+          alt="PNG Background"
+          fill
+          className="pointer-events-none object-cover"
+        />
+        <button
+          onClick={() => setIsBlack(!isBlack)}
+          className="p-2 bg-blue-500 text-white rounded-lg z-10"
+        >
+          Toggle Image
+        </button>
+        <ProfilePicture isBlack={isBlack} />
       </div>
+    </div>
   );
 };
 

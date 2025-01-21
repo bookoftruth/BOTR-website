@@ -39,7 +39,7 @@ const Loader = () => {
 
   return (
     <button
-      className={`h-full w-full flex flex-col gap-6 items-center justify-center relative ${loading ? 'pointer-events-none' : ''}`}
+      className={`h-full w-full flex flex-col gap-6 items-center justify-center relative z-10 ${loading ? 'pointer-events-none' : ''}`}
       onClick={!loading ? handleEnter : null}
     >
       <video

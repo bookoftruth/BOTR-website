@@ -5,7 +5,7 @@ import Store from "@/components/store/Store";
 
 export default function StorePage() {
   return (
-    <Layout backgroundType="soon">
+    <Layout theme="soon">
       <Store />
     </Layout>
   );

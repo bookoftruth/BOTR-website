@@ -5,7 +5,7 @@ import PfpEditor from "@/components/pfp-editor/PfpEditor";
 
 export default function PfpEditorPage() {
   return (
-    <Layout backgroundType="editor">
+    <Layout theme="editor">
       <PfpEditor />
     </Layout>
   );

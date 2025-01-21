@@ -16,6 +16,11 @@ module.exports = {
         'terminal': ['"Terminal"', 'monospace'],
         'windows' : ['"Windows"', 'sans-serif'],
       },
+      colors: {
+        'windows-primary': 'var(--windows-primary-color)',
+        'windows-secondary': 'var(--windows-secondary-color)',
+        'windows-tertiary': 'var(--windows-tertiary-color)',
+      },
     },
   },
   plugins: [],

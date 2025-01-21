@@ -2,21 +2,25 @@
 
 import { useGlobalState } from "@/context/GlobalStateContext";
 import Image from "next/image";
+import clsx from "clsx";
 
-const AudioButton = ({ backgroundType }) => {
+const AudioButton = ({ theme }) => {
   const { isMuted, setIsMuted } = useGlobalState();
 
   return (
     <button
       onClick={() => setIsMuted(!isMuted)}
-      className={`${backgroundType !== "editor" ? "p-1 bg-white text-black rounded-lg shadow-md border border-black hover:bg-gray-200 transition-colors z-20" : ""}`}
+      className={clsx(
+        theme !== "editor" && 
+          "p-1 bg-white text-black rounded-lg shadow-md border border-black hover:bg-gray-200 transition-colors z-20"
+      )}
     >
       <Image
-        src={`/img/${backgroundType !== "editor" ? "" : "pfp-editor/"}icons/${isMuted ? "mute" : "sound"}.png`}
+        src={`/img/${theme !== "editor" ? "" : "pfp-editor/"}icons/${isMuted ? "mute" : "sound"}.png`}
         alt={isMuted ? "Mute" : "Sound"}
         width={16}
         height={16}
-        className={`${backgroundType !== "editor" ? "" : "h-6 w-auto"}`}
+        className={clsx(theme === "editor" && "h-8 w-auto")}
       />
     </button>
   );
