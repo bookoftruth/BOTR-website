@@ -6,9 +6,11 @@ import { Suspense, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import Botr from './Botr';
 import Lights from './Lights';
+import { useGlobalState } from '@/context/GlobalStateContext';
 
 const ResponsiveCanvas = () => {
   const { camera, gl } = useThree();
+  const { alreadyEntered } = useGlobalState();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,17 +30,20 @@ const ResponsiveCanvas = () => {
   }, [camera, gl]);
 
   useEffect(() => {
-    gsap.to(camera.position, {
-      duration: 2,
-      x: 0,
-      y: 3,
-      z: 5,
-      ease: 'power2.inOut',
-      onUpdate: () => {
-        camera.lookAt(0, 0, 0);
-      },
-    });
-  }, [camera]);
+    if (alreadyEntered) {
+      gsap.to(camera.position, {
+        duration: 2,
+        x: 0,
+        y: 3,
+        z: 5,
+        ease: 'power2.inOut',
+        onUpdate: () => {
+          camera.lookAt(0, 0, 0);
+        },
+      });
+    }
+  }, [camera, alreadyEntered]);
+
 
   return null;
 };

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 const ProfilePicture = ({isBlack}) => {
   const [dragging, setDragging] = useState(false);
@@ -94,9 +95,8 @@ const ProfilePicture = ({isBlack}) => {
   );
 };
 
-const PfpEditor = () => {
+const Paint = () => {
   const [isBlack, setIsBlack] = useState(false);
-
   return (
     <div className="relative p-24 flex flex-col items-center justify-center h-screen w-screen top-1/2 font-windows">
       <div className="relative border-4 border-white w-1/2 h-1/2 items-center justify-center flex">
@@ -132,6 +132,54 @@ const PfpEditor = () => {
         <ProfilePicture isBlack={isBlack} />
       </div>
     </div>
+  )
+}
+
+const Window = ({ fullScreen, toggleFullScreen, index }) => (
+  <>
+    <div
+      className={clsx(
+        "fixed w-screen border-4 border-white bg-black z-50",
+        fullScreen ? "top-0 bottom-10 w-screen" : "top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2"
+      )}
+    >
+      <button
+        className="absolute left-1/2 top-1/2 text-white text-2xl"
+        onClick={() => toggleFullScreen(index)}
+      >
+        Toggle Fullscreen
+      </button>
+    </div>
+  </>
+);
+
+const PfpEditor = () => {
+  const [windows, setWindows] = useState([
+    { id: 1, fullScreen: false },
+    // { id: 2, fullScreen: false },
+  ]);
+
+  const toggleFullScreen = (index) => {
+    setWindows((prevWindows) =>
+      prevWindows.map((window, i) =>
+        i === index ? { ...window, fullScreen: !window.fullScreen } : window
+      )
+    );
+  };
+
+  return (
+    <>
+      {windows.map((window, index) => (
+        <Window
+          key={window.id}
+          fullScreen={window.fullScreen}
+          toggleFullScreen={toggleFullScreen}
+          index={index}
+        />
+      ))}
+
+      {/* <Paint /> */}
+    </>
   );
 };
 

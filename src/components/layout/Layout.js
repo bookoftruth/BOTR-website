@@ -57,7 +57,7 @@ const Layout = ({ children, theme }) => {
       <Navbar theme={theme} />
       <Footer theme={theme}/>
       <Background theme={theme} />
-      <main className="relative z-10">{children}</main>
+      <main className="relative">{children}</main>
     </>
   );
 }

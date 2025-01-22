@@ -10,6 +10,7 @@ module.exports = {
       screens: {
         'xxs': '350px',
         'xs': '420px',
+        'h-sm': { raw: '(max-height: 690px)' },
       },
       fontFamily: {
         'gothic': ['"OldEnglishGothicPixel"', 'sans-serif'],

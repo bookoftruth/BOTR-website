@@ -91,7 +91,7 @@ const NavLink = ({
         ? isMobile
           ? "text-black bg-gray-200"
           : theme === "editor"
-            ? "bg-windows-tertiary"
+            ? "bg-windows-tertiary border border-black"
             : "underline"
         : isMobile
           ? "hover:text-gray-200"
@@ -188,10 +188,10 @@ const Navbar = ({ theme }) => {
     <>
       <div
         className={clsx(
-          "fixed top-0 h-24 w-full z-30 flex text-white text-shadow-black",
+          "fixed top-0 h-24 w-full z-20 flex text-white",
           theme === "editor"
             ? "font-windows flex-row-reverse"
-            : "items-center px-4",
+            : "items-center px-4 text-shadow-black",
           (theme === "roadmap" || theme === "soon") &&
             "backdrop-blur bg-black/30 shadow-lg"
         )}
@@ -212,7 +212,7 @@ const Navbar = ({ theme }) => {
             className={clsx(
               "flex-row",
               theme === "editor"
-                ? "flex text-sm pl-2 pt-4"
+                ? "flex text-sm pl-2 pt-4 h-sm:hidden"
                 : "hidden xl:flex justify-center items-center text-2xl 2xl:text-3xl gap-6 sm:gap-10"
             )}
           >

@@ -10,7 +10,7 @@ const SocialLinks = ({ theme }) => (
   <div
     className={clsx(
       'flex flex-row hover:text-gray-200',
-      theme === 'editor' ? 'pl-2' : 'justify-center gap-2 xs:gap-4 md:gap-10'
+      theme === 'editor' ? 'pl-2 h-sm:hidden' : 'justify-center gap-2 xs:gap-4 md:gap-10'
     )}
   >
     {socialLinks.map(({ href, icon, iconEditor, alt }) => (
@@ -35,14 +35,14 @@ const SocialLinks = ({ theme }) => (
         </span>
         <div
           className={clsx(
-            theme === 'editor' ? '' : 'block sm:hidden transition-transform duration-200 hover:scale-110'
+            theme !== 'editor' && 'block sm:hidden transition-transform duration-200 hover:scale-110'
           )}
         >
           <Image
             src={theme === 'editor' ? iconEditor : icon}
             alt={alt}
-            width={48}
-            height={48}
+            width={theme === 'editor' ? 48 : 36}
+            height={theme === 'editor' ? 48 : 36}
           />
         </div>
       </a>
@@ -116,7 +116,7 @@ const EditorTemplate = ({ theme }) => {
       <div
         ref={(el) => (startRefs.current[0] = el)}
         className={clsx(
-          'fixed bg-windows-primary z-20 h-2/3 w-1/3 bottom-10 left-0',
+          'fixed bg-windows-primary z-50 h-2/3 w-1/3 bottom-10 left-0 border-b',
           startOpen ? 'block' : 'hidden'
         )}
       />
