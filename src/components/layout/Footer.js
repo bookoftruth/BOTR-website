@@ -17,7 +17,7 @@ const socialLinks = [
     alt: 'Telegram',
   },
   {
-    href: 'https://github.com/bookoftruth/Book_of_truth',
+    href: 'https://github.com/bookoftruth/',
     icon: '/img/socials/github.svg',
     alt: 'GitHub',
   },
