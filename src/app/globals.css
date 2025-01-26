@@ -34,7 +34,7 @@
   --windows-tertiary-color: #060087;
   --size: min(100vw, 100vh);
   --size-botr: calc(var(--size) * 0.5);
-  cursor: url('/img/cursor/mouse.png'), auto;
+  cursor: url('/img/cursors/mouse.svg'), auto;
 }
 
 html,
@@ -49,7 +49,23 @@ body {
 }
 
 a, button, [role="button"] {
-  cursor: url('/img/cursor/select.png'), pointer;
+  cursor: url('/img/cursors/select.svg') 7 0, pointer;
+}
+
+.cursor-move {
+  cursor: url('/img/cursors/move.svg') 12 12, move;
+}
+
+.cursor-hor-resize {
+  cursor: url('/img/cursors/hor-resize.svg') 5 0, ew-resize;
+}
+
+.cursor-vert-resize {
+  cursor: url('/img/cursors/vert-resize.svg') 0 5, ns-resize;
+}
+
+.cursor-diag-right-resize {
+  cursor: url('/img/cursors/se-resize.svg') 3 3, se-resize;
 }
 
 @keyframes fadeInOut {
@@ -81,6 +97,35 @@ a, button, [role="button"] {
   text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
 }
 
+.text-shadow-white {
+  text-shadow: 1px 1px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff;
+}
+
+.text-shadow-white-2 {
+  text-shadow: 0.5px 0.5px 0 #ffffff, -0.5px -0.5px 0 #ffffff, 0.5px -0.5px 0 #ffffff, -0.5px 0.5px 0 #ffffff;
+}
+
+.size-book {
+  width: calc(var(--size-botr) * 0.5);
+  height: calc(var(--size-botr) * 0.5);
+}
+
+.drag-upload {
+  position: absolute;
+  left: calc(var(--size-botr) * 0.098);
+  top: calc(var(--size-botr) * 0.042);
+  width: 69%;
+  height: 76.5%;
+}
+
+.profile-picture {
+  position: absolute;
+  width: 70%;
+  height: 80%;
+  left: calc(var(--size-botr) * 0.095);
+  top: calc(var(--size-botr) * 0.03);
+  object-fit: cover;
+}
 .text-shadow-white {
   text-shadow: 1px 1px 0 #ffffff, -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff;
 }

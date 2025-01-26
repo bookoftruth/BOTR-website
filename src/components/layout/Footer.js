@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import AudioButton from './AudioButton';
 import { ADDRESS, socialLinks } from '@/context/constants';
+import Link from 'next/link';
 
 const SocialLinks = ({ theme }) => (
   <div
@@ -14,7 +15,7 @@ const SocialLinks = ({ theme }) => (
     )}
   >
     {socialLinks.map(({ href, icon, iconEditor, alt }) => (
-      <a
+      <Link
         key={href}
         href={href}
         target="_blank"
@@ -45,7 +46,7 @@ const SocialLinks = ({ theme }) => (
             height={theme === 'editor' ? 48 : 36}
           />
         </div>
-      </a>
+      </Link>
     ))}
   </div>
 );
@@ -136,7 +137,7 @@ const BaseTemplate = () => {
 
   return (
     <div className="flex items-center justify-center mt-4 gap-2">
-      <p className="text-center xs:text-xl sm:text-2xl">{ADDRESS}</p>
+      <p className="text-center select-text xs:text-xl sm:text-2xl">{ADDRESS}</p>
       <button
         onClick={handleCopy}
         className={clsx(

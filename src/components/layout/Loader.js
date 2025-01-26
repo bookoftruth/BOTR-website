@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useGlobalState } from "@/context/GlobalStateContext";
+import clsx from "clsx";
 
 const Loader = () => {
   const [loading, setLoading] = useState(true);
@@ -39,7 +40,10 @@ const Loader = () => {
 
   return (
     <button
-      className={`h-full w-full flex flex-col gap-6 items-center justify-center relative z-10 ${loading ? 'pointer-events-none' : ''}`}
+      className={clsx(
+        "h-full w-full flex flex-col gap-6 items-center justify-center relative z-10",
+        loading && "pointer-events-none"
+      )}
       onClick={!loading ? handleEnter : null}
     >
       <video
@@ -48,7 +52,10 @@ const Loader = () => {
         muted
         playsInline
         controls={false}
-        className={`absolute left-1/2 top-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 object-cover pointer-events-none z-0 transition-transform duration-1000 ease-in-out ${zoomingIn ? 'scale-[30] -translate-y-[900%]' : '-translate-y-1/2'}`}
+        className={clsx(
+          "absolute left-1/2 top-1/2 w-auto h-auto min-w-full min-h-full -translate-x-1/2 object-cover pointer-events-none z-0 transition-transform duration-1000 ease-in-out",
+          zoomingIn ? "scale-[30] -translate-y-[900%]" : "-translate-y-1/2"
+        )}
       >
         <source src="/videos/loading.mp4" type="video/mp4" />
         Your browser does not support the video tag.

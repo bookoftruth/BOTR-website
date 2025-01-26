@@ -102,7 +102,13 @@ const NavLink = ({
   </Link>
 );
 
-const NavLinks = ({ theme, pathname, setMenuOpen, setAlreadyEntered, isMobile }) => (
+const NavLinks = ({
+  theme,
+  pathname,
+  setMenuOpen,
+  setAlreadyEntered,
+  isMobile,
+}) => (
   <>
     {theme === "editor" && (
       <DesktopShortcut
@@ -112,18 +118,34 @@ const NavLinks = ({ theme, pathname, setMenuOpen, setAlreadyEntered, isMobile })
         size={48}
       />
     )}
-    {navLinks.map(({ href, label, src }) =>
-      !(theme === "editor" && label === "Book of Truth") && (
-        <NavLink key={href} theme={theme} src={src} label={label} href={href} pathname={pathname} setMenuOpen={setMenuOpen} setAlreadyEntered={setAlreadyEntered} isMobile={isMobile} />
-      )
+    {navLinks.map(
+      ({ href, label, src }) =>
+        !(theme === "editor" && label === "Book of Truth") && (
+          <NavLink
+            key={href}
+            theme={theme}
+            src={src}
+            label={label}
+            href={href}
+            pathname={pathname}
+            setMenuOpen={setMenuOpen}
+            setAlreadyEntered={setAlreadyEntered}
+            isMobile={isMobile}
+          />
+        )
     )}
     {theme === "editor" && (
-      <DesktopShortcut
-        theme={theme}
-        src="/img/pfp-editor/icons/bin.png"
-        label="Recycle Bin"
-        size={48}
-      />
+      <Link
+        href="https://pump.fun/coin/73242b77KLvkkUNRQRT3CYNbNFq28dFoy8F2tF6apump"
+        target="_blank"
+      >
+        <DesktopShortcut
+          theme={theme}
+          src="/img/pfp-editor/icons/bin.png"
+          label="Recycle Bin"
+          size={48}
+        />
+      </Link>
     )}
   </>
 );
@@ -222,7 +244,12 @@ const Navbar = ({ theme }) => {
                   "flex flex-row justify-center items-center gap-6 sm:gap-10"
               )}
             >
-              <NavLinks theme={theme} pathname={pathname} setMenuOpen={setMenuOpen} setAlreadyEntered={setAlreadyEntered} />
+              <NavLinks
+                theme={theme}
+                pathname={pathname}
+                setMenuOpen={setMenuOpen}
+                setAlreadyEntered={setAlreadyEntered}
+              />
             </div>
 
             {theme === "editor" && (
@@ -239,14 +266,18 @@ const Navbar = ({ theme }) => {
                   />
                 </div>
 
-                <div className="pt-[11rem]">
+                <Link
+                  href="https://open.spotify.com/playlist/7FENUSmktg9GKNdNiDj9MN"
+                  target="_blank"
+                  className="pt-[11rem]"
+                >
                   <DesktopShortcut
                     theme={theme}
                     src="/img/pfp-editor/icons/music.png"
                     label="Music"
                     size={48}
                   />
-                </div>
+                </Link>
               </>
             )}
           </nav>

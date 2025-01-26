@@ -18,8 +18,8 @@ const AudioButton = ({ theme }) => {
       <Image
         src={`/img/${theme !== "editor" ? "" : "pfp-editor/"}icons/${isMuted ? "mute" : "sound"}.png`}
         alt={isMuted ? "Mute" : "Sound"}
-        width={16}
-        height={16}
+        width={theme === "editor" ? 52 : 16}
+        height={theme === "editor" ? 48 : 16}
         className={clsx(theme === "editor" && "h-8 w-auto")}
       />
     </button>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 
@@ -97,66 +97,240 @@ const ProfilePicture = ({isBlack}) => {
 
 const Paint = () => {
   const [isBlack, setIsBlack] = useState(false);
+
   return (
-    <div className="relative p-24 flex flex-col items-center justify-center h-screen w-screen top-1/2 font-windows">
-      <div className="relative border-4 border-white w-1/2 h-1/2 items-center justify-center flex">
-        <div className="absolute top-0 w-full h-5 bg-[#060087] z-10 items-center flex flex-row gap-1">
+    <div
+      className="relative border-4 w-full h-full flex items-center justify-center overflow-hidden"
+      style={{
+        backgroundImage: 'url("/img/pfp-editor/png.png")',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '20px 20px',
+      }}
+    >
+      <button
+        onClick={() => setIsBlack(!isBlack)}
+        className="p-2 bg-blue-500 text-white rounded-lg z-10"
+      >
+        Toggle Image
+      </button>
+
+      <ProfilePicture isBlack={isBlack} />
+    </div>
+  );
+};
+
+const Window = ({ fullScreen, toggleFullScreen, index, children, title, ico, alt }) => {
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth * 0.5,
+    height: window.innerHeight * 0.5,
+    top: window.innerHeight * 0.25,
+    left: window.innerWidth * 0.25,
+  });
+
+  const containerRef = useRef(null);
+  const topBarRef = useRef(null);
+  const isDragging = useRef(false);
+  const dragOffset = useRef({ x: 0, y: 0 });
+
+  const isResizing = useRef(false);
+  const resizeDirection = useRef('');
+
+  const handleDragStart = (e) => {
+    if (fullScreen) return;
+    isDragging.current = true;
+    dragOffset.current = {
+      x: e.clientX - dimensions.left,
+      y: e.clientY - dimensions.top,
+    };
+    document.addEventListener('mousemove', handleDrag);
+    document.addEventListener('mouseup', handleDragEnd);
+  };
+
+  const remToPx = (rem) => parseFloat(getComputedStyle(document.documentElement).fontSize) * rem;
+
+const handleDrag = (e) => {
+  if (!isDragging.current) return;
+
+  const bottomBarHeight = remToPx(2.5);
+
+  setDimensions((prev) => {
+    const newTop = Math.max(
+      0,
+      Math.min(
+        e.clientY - dragOffset.current.y,
+        window.innerHeight - prev.height - bottomBarHeight
+      )
+    );
+
+    const newLeft = Math.max(
+      0,
+      Math.min(
+        e.clientX - dragOffset.current.x,
+        window.innerWidth - prev.width
+      )
+    );
+
+    return {
+      ...prev,
+      top: newTop,
+      left: newLeft,
+    };
+  });
+};
+
+  const handleDragEnd = () => {
+    isDragging.current = false;
+    document.removeEventListener('mousemove', handleDrag);
+    document.removeEventListener('mouseup', handleDragEnd);
+  };
+
+  const handleMouseDown = (e, direction) => {
+    e.preventDefault();
+    isResizing.current = true;
+    resizeDirection.current = direction;
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isResizing.current) return;
+
+    setDimensions((prev) => {
+      const newDimensions = { ...prev };
+
+      if (resizeDirection.current === 'right') {
+        const newWidth = e.clientX - containerRef.current.getBoundingClientRect().left;
+        newDimensions.width = Math.max(newWidth, 100);
+      }
+
+      if (resizeDirection.current === 'bottom') {
+        const newHeight = e.clientY - containerRef.current.getBoundingClientRect().top;
+        newDimensions.height = Math.max(newHeight, 100);
+      }
+
+      if (resizeDirection.current === 'bottom-right') {
+        const newWidth = e.clientX - containerRef.current.getBoundingClientRect().left;
+        const newHeight = e.clientY - containerRef.current.getBoundingClientRect().top;
+        newDimensions.width = Math.max(newWidth, 100);
+        newDimensions.height = Math.max(newHeight, 100);
+      }
+
+      return newDimensions;
+    });
+  };
+
+  const handleMouseUp = () => {
+    isResizing.current = false;
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseUp);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={clsx(
+        "shadow-lg z-50 font-windows",
+        fullScreen ? "fixed" : "absolute overflow-auto"
+      )}
+      style={{
+        width: fullScreen ? "100%" : `${dimensions.width}px`,
+        height: fullScreen ? "100%" : `${dimensions.height}px`,
+        top: `${fullScreen ? 0 : dimensions.top}px`,
+        left: `${fullScreen ? 0 : dimensions.left}px`,
+        minWidth: "300px",
+        minHeight: "200px",
+        maxHeight: `calc(100vh - 2.5rem - ${fullScreen ? 0 : dimensions.top}px)`,
+        maxWidth: `calc(100vw - ${fullScreen ? 0 : dimensions.left}px)`,
+      }}
+    >
+      <div className="h-full w-full flex flex-col">
+        <div
+          ref={topBarRef}
+          className={clsx("w-full h-6 bg-[#060087] z-10 items-center flex flex-row gap-1 cursor-move",
+            !fullScreen && "cursor-move"
+          )}
+          onMouseDown={handleDragStart}
+        >
           <Image
-            src="/img/pfp-editor/icons/paint.png"
-            alt="Paint Logo"
+            src={ico}
+            alt={alt}
             width={250}
             height={250}
             className="h-4 w-auto ml-0.5"
           />
-          <div className="text-white">untitled - Paint</div>
-          <Image
-            src="/img/pfp-editor/window-controls.png"
-            alt="Window Controls"
-            width={1701}
-            height={527}
-            className="h-full w-auto ml-auto"
-          />
-        </div>
-        <Image
-          src="/img/pfp-editor/png.png"
-          alt="PNG Background"
-          fill
-          className="pointer-events-none object-cover"
-        />
-        <button
-          onClick={() => setIsBlack(!isBlack)}
-          className="p-2 bg-blue-500 text-white rounded-lg z-10"
-        >
-          Toggle Image
-        </button>
-        <ProfilePicture isBlack={isBlack} />
-      </div>
-    </div>
-  )
-}
+          <div className="text-white">{title}</div>
 
-const Window = ({ fullScreen, toggleFullScreen, index }) => (
-  <>
-    <div
-      className={clsx(
-        "fixed w-screen border-4 border-white bg-black z-50",
-        fullScreen ? "top-0 bottom-10 w-screen" : "top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2"
-      )}
-    >
-      <button
-        className="absolute left-1/2 top-1/2 text-white text-2xl"
-        onClick={() => toggleFullScreen(index)}
-      >
-        Toggle Fullscreen
-      </button>
+          <div className="flex ml-auto h-full w-auto">
+            <button className="h-full w-auto">
+              <Image
+                src="/img/pfp-editor/minimize.png"
+                alt="Minimize Window Control"
+                width={597}
+                height={528}
+                className="h-full w-auto"
+              />
+            </button>
+
+            <button
+              className="h-full w-auto"
+              onClick={() => toggleFullScreen(index)}
+            >
+              <Image
+                src="/img/pfp-editor/fullscreen.png"
+                alt="Full Window Control"
+                width={536}
+                height={528}
+                className="h-full w-auto"
+              />
+            </button>
+
+            <button className="h-full w-auto">
+              <Image
+                src="/img/pfp-editor/close.png"
+                alt="Close Window Control"
+                width={536}
+                height={528}
+                className="h-full w-auto"
+              />
+            </button>
+          </div>
+        </div>
+
+        {children}
+      </div>
+
+      <div
+        className="absolute top-0 right-0 h-full w-2 cursor-hor-resize"
+        onMouseDown={(e) => handleMouseDown(e, "right")}
+      ></div>
+
+      <div
+        className="absolute bottom-0 left-0 w-full h-2 cursor-vert-resize"
+        onMouseDown={(e) => handleMouseDown(e, "bottom")}
+      ></div>
+
+      <div
+        className="absolute bottom-0 right-0 h-4 w-4 bg-transparent cursor-diag-right-resize"
+        onMouseDown={(e) => handleMouseDown(e, "bottom-right")}
+      ></div>
     </div>
-  </>
-);
+  );
+};
 
 const PfpEditor = () => {
   const [windows, setWindows] = useState([
-    { id: 1, fullScreen: false },
-    // { id: 2, fullScreen: false },
+    {
+      id: 1,
+      fullScreen: false,
+      title: "untitled - Paint",
+      ico: "/img/pfp-editor/icons/paint.png",
+    },
+    // {
+    //   id: 2,
+    //   fullScreen: false,
+    //   title: "untitled - Paint",
+    //   ico: "/img/pfp-editor/icons/paint.png",
+    // },
   ]);
 
   const toggleFullScreen = (index) => {
@@ -175,10 +349,12 @@ const PfpEditor = () => {
           fullScreen={window.fullScreen}
           toggleFullScreen={toggleFullScreen}
           index={index}
-        />
+          title={window.title}
+          ico={window.ico}
+        >
+          <Paint />
+        </Window>
       ))}
-
-      {/* <Paint /> */}
     </>
   );
 };
