@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
 import AudioButton from './AudioButton';
-import { ADDRESS, socialLinks } from '@/context/constants';
+import { ADDRESS, socialLinks } from '@/utils/utils';
 import Link from 'next/link';
 
 const SocialLinks = ({ theme }) => (

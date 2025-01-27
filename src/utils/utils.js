@@ -1,3 +1,5 @@
+import Paint from "@/components/pfp-editor/Paint";
+
 export const ADDRESS = '73242b77KLvkkUNRQRT3CYNbNFq28dFoy8F2tF6apump';
 
 export const socialLinks = [
@@ -61,4 +63,32 @@ export const navLinks = [
     label: "Merch Store",
     src: "/img/pfp-editor/icons/merch.png",
   },
+];
+
+export const windowsConfig = [
+  {
+    id: 1,
+    fullScreen: false,
+    closed: false,
+    hidden: false,
+    title: "untitled - Paint",
+    icon: "/img/pfp-editor/icons/paint.png",
+    children: Paint,
+  },
+  // {
+  //   id: 2,
+  //   fullScreen: false,
+  //   closed: false,
+  //   title: "Spotify",
+  //   icon: "/img/pfp-editor/icons/spotify.png",
+  //   children: Spotify,
+  // },
+  // {
+  //   id: 3,
+  //   fullScreen: false,
+  //   closed: false,
+  //   title: "Notepad",
+  //   icon: "/img/pfp-editor/icons/notepad.png",
+  //   children: Notepad,
+  // }
 ];

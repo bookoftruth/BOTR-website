@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect } from 'react';
-import { useGlobalState } from "@/context/GlobalStateContext";
+import { useGlobalState } from "@/utils/GlobalStateContext";
 
 const AudioPlayer = () => {
   const { isMuted, isPlaying } = useGlobalState();

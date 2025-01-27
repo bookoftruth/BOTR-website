@@ -1,6 +1,6 @@
 import AudioPlayer from "@/components/layout/AudioPlayer";
 import "./globals.css";
-import { GlobalStateProvider } from "@/context/GlobalStateContext";
+import { GlobalStateProvider } from "@/utils/GlobalStateContext";
 
 export const metadata = {
   title: "📖  𝔅𝔬𝔬𝔨 𝔬𝔣 𝔗𝔯𝔲𝔱𝔥  📖",

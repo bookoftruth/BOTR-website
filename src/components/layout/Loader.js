@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from "react";
-import { useGlobalState } from "@/context/GlobalStateContext";
+import { useGlobalState } from "@/utils/GlobalStateContext";
 import clsx from "clsx";
 
 const Loader = () => {
@@ -63,7 +63,7 @@ const Loader = () => {
 
       {loading && !alreadyEntered && (
         <div className="flex items-center justify-center">
-          <div className="w-24 h-24 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <div className="loader"></div>
         </div>
       )}
 

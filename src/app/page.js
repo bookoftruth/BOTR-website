@@ -3,7 +3,7 @@
 import Layout from "@/components/layout/Layout";
 import Loader from "@/components/layout/Loader";
 import { SceneContainer } from "@/components/botr/SceneContainer";
-import { useGlobalState } from "@/context/GlobalStateContext";
+import { useGlobalState } from "@/utils/GlobalStateContext";
 import { useEffect } from "react";
 
 export default function Home() {

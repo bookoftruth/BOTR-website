@@ -4,9 +4,9 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useGlobalState } from "@/context/GlobalStateContext";
+import { useGlobalState } from "@/utils/GlobalStateContext";
 import AudioButton from "./AudioButton";
-import { navLinks } from '@/context/constants';
+import { navLinks } from '@/utils/utils';
 import clsx from "clsx";
 
 const Title = ({ theme, setAlreadyEntered, activeLabel }) => (
@@ -80,8 +80,8 @@ const NavLink = ({
   <Link
     href={href}
     onClick={() => {
-      setMenuOpen(false);
-      setAlreadyEntered(true);
+        setMenuOpen(false);
+        setAlreadyEntered(true);
     }}
     className={clsx(
       theme === "editor"
@@ -108,6 +108,8 @@ const NavLinks = ({
   setMenuOpen,
   setAlreadyEntered,
   isMobile,
+  openWindow,
+  showWindow,
 }) => (
   <>
     {theme === "editor" && (
@@ -120,7 +122,18 @@ const NavLinks = ({
     )}
     {navLinks.map(
       ({ href, label, src }) =>
-        !(theme === "editor" && label === "Book of Truth") && (
+        !(theme === "editor" && label === "Book of Truth") &&
+        (theme === "editor" && label === "PFP Editor" ? (
+          <DesktopShortcut
+            key={href}
+            theme={theme}
+            src={src}
+            label={label}
+            size={48}
+            openWindow={openWindow}
+            showWindow={showWindow}
+          />
+        ) : (
           <NavLink
             key={href}
             theme={theme}
@@ -132,7 +145,7 @@ const NavLinks = ({
             setAlreadyEntered={setAlreadyEntered}
             isMobile={isMobile}
           />
-        )
+        ))
     )}
     {theme === "editor" && (
       <Link
@@ -188,18 +201,21 @@ const SideBar = ({ menuOpen, setMenuOpen, setAlreadyEntered, theme, pathname }) 
   );
 };
 
-const DesktopShortcut = ({ theme, src, label, size }) => (
-  <button className="flex flex-col items-center justify-center p-2 w-24">
-    <LinkTemplate
-      theme={theme}
-      src={src}
-      label={label}
-      size={size}
-    />
+const DesktopShortcut = ({ theme, src, label, size, openWindow, showWindow }) => (
+  <button
+    onClick={() => {
+      if (theme === "editor" && label === "PFP Editor") {
+        openWindow(0);
+        showWindow(0);
+      }
+    }}
+    className="flex flex-col items-center justify-center p-2 w-24"
+  >
+    <LinkTemplate theme={theme} src={src} label={label} size={size} />
   </button>
 );
 
-const Navbar = ({ theme }) => {
+const Navbar = ({ theme, openWindow, showWindow }) => {
   const { setAlreadyEntered } = useGlobalState();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -249,6 +265,8 @@ const Navbar = ({ theme }) => {
                 pathname={pathname}
                 setMenuOpen={setMenuOpen}
                 setAlreadyEntered={setAlreadyEntered}
+                openWindow={openWindow}
+                showWindow={showWindow}
               />
             </div>
 

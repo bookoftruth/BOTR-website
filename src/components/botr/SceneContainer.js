@@ -6,7 +6,7 @@ import { Suspense, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import Botr from './Botr';
 import Lights from './Lights';
-import { useGlobalState } from '@/context/GlobalStateContext';
+import { useGlobalState } from '@/utils/GlobalStateContext';
 
 const ResponsiveCanvas = () => {
   const { camera, gl } = useThree();
