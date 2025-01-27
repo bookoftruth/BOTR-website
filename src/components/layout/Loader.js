@@ -16,6 +16,15 @@ const Loader = () => {
 
     return () => clearTimeout(timer);
   }, [setLoading]);
+  
+  const handleEnter = useCallback(() => {
+    setZoomingIn(true);
+    setTimeout(() => {
+      setAlreadyEntered(true);
+      setIsMuted(false);
+      setIsPlaying(true);
+    }, 1000);
+  }, [setAlreadyEntered, setIsMuted, setIsPlaying]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -26,16 +35,8 @@ const Loader = () => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [loading]);
+  }, [loading, handleEnter]);
 
-  const handleEnter = useCallback(() => {
-    setZoomingIn(true);
-    setTimeout(() => {
-      setAlreadyEntered(true);
-      setIsMuted(false);
-      setIsPlaying(true);
-    }, 1000);
-  }, [setAlreadyEntered, setIsMuted, setIsPlaying]);
 
   return (
     <button

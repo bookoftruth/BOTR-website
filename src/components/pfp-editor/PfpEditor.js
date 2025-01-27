@@ -119,17 +119,27 @@ const Paint = () => {
   );
 };
 
-const Window = ({ fullScreen, toggleFullScreen, index, children, title, icon, alt }) => {
-  const getInitialPosition = () => {
-    return {
-      width: window.innerWidth * 0.5,
-      height: window.innerHeight * 0.5,
-      top: window.innerHeight * 0.25,
-      left: window.innerWidth * 0.25,
-    };
+const getInitialPosition = () => {
+  return {
+    width: window.innerWidth * 0.5,
+    height: window.innerHeight * 0.5,
+    top: window.innerHeight * 0.25,
+    left: window.innerWidth * 0.25,
   };
+};
 
-  const [dimensions, setDimensions] = useState(() => getInitialPosition());
+const Window = ({ fullScreen, toggleFullScreen, index, children, title, icon, alt }) => {
+  const [dimensionsDefined, setDimensionsDefined] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0, top: 0, left: 0 });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDimensions(getInitialPosition());
+      setDimensionsDefined(true);
+    } else {
+      return null;
+    }
+  }, []);
 
   const containerRef = useRef(null);
   const topBarRef = useRef(null);
@@ -274,6 +284,8 @@ const Window = ({ fullScreen, toggleFullScreen, index, children, title, icon, al
         minHeight: "200px",
         maxHeight: `calc(100vh - 2.5rem - ${fullScreen ? 0 : dimensions.top}px)`,
         maxWidth: `calc(100vw - ${fullScreen ? 0 : dimensions.left}px)`,
+        opacity: dimensionsDefined ? 1 : 0,
+        transition: "opacity 0.1s ease-in",
       }}
     >
       <div className="h-full w-full flex flex-col">
