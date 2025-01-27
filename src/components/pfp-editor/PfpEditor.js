@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
 
@@ -119,13 +119,17 @@ const Paint = () => {
   );
 };
 
-const Window = ({ fullScreen, toggleFullScreen, index, children, title, ico, alt }) => {
-  const [dimensions, setDimensions] = useState({
-    width: window.innerWidth * 0.5,
-    height: window.innerHeight * 0.5,
-    top: window.innerHeight * 0.25,
-    left: window.innerWidth * 0.25,
-  });
+const Window = ({ fullScreen, toggleFullScreen, index, children, title, icon, alt }) => {
+  const getInitialPosition = () => {
+    return {
+      width: window.innerWidth * 0.5,
+      height: window.innerHeight * 0.5,
+      top: window.innerHeight * 0.25,
+      left: window.innerWidth * 0.25,
+    };
+  };
+
+  const [dimensions, setDimensions] = useState(() => getInitialPosition());
 
   const containerRef = useRef(null);
   const topBarRef = useRef(null);
@@ -134,6 +138,35 @@ const Window = ({ fullScreen, toggleFullScreen, index, children, title, ico, alt
 
   const isResizing = useRef(false);
   const resizeDirection = useRef('');
+
+  const resetPosition = () => {
+    setDimensions(getInitialPosition());
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions((prev) => {
+        const newWidth = Math.min(prev.width, window.innerWidth);
+        const newHeight = Math.min(prev.height, window.innerHeight);
+        const newTop = Math.min(prev.top, window.innerHeight - newHeight);
+        const newLeft = Math.min(prev.left, window.innerWidth - newWidth);
+
+        return {
+          ...prev,
+          width: newWidth,
+          height: newHeight,
+          top: newTop >= 0 ? newTop : 0,
+          left: newLeft >= 0 ? newLeft : 0,
+        };
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const handleDragStart = (e) => {
     if (fullScreen) return;
@@ -148,35 +181,35 @@ const Window = ({ fullScreen, toggleFullScreen, index, children, title, ico, alt
 
   const remToPx = (rem) => parseFloat(getComputedStyle(document.documentElement).fontSize) * rem;
 
-const handleDrag = (e) => {
-  if (!isDragging.current) return;
+  const handleDrag = (e) => {
+    if (!isDragging.current) return;
 
-  const bottomBarHeight = remToPx(2.5);
+    const bottomBarHeight = remToPx(2.5);
 
-  setDimensions((prev) => {
-    const newTop = Math.max(
-      0,
-      Math.min(
-        e.clientY - dragOffset.current.y,
-        window.innerHeight - prev.height - bottomBarHeight
-      )
-    );
+    setDimensions((prev) => {
+      const newTop = Math.max(
+        0,
+        Math.min(
+          e.clientY - dragOffset.current.y,
+          window.innerHeight - prev.height - bottomBarHeight
+        )
+      );
 
-    const newLeft = Math.max(
-      0,
-      Math.min(
-        e.clientX - dragOffset.current.x,
-        window.innerWidth - prev.width
-      )
-    );
+      const newLeft = Math.max(
+        0,
+        Math.min(
+          e.clientX - dragOffset.current.x,
+          window.innerWidth - prev.width
+        )
+      );
 
-    return {
-      ...prev,
-      top: newTop,
-      left: newLeft,
-    };
-  });
-};
+      return {
+        ...prev,
+        top: newTop,
+        left: newLeft,
+      };
+    });
+  };
 
   const handleDragEnd = () => {
     isDragging.current = false;
@@ -252,7 +285,7 @@ const handleDrag = (e) => {
           onMouseDown={handleDragStart}
         >
           <Image
-            src={ico}
+            src={icon}
             alt={alt}
             width={250}
             height={250}
@@ -323,13 +356,13 @@ const PfpEditor = () => {
       id: 1,
       fullScreen: false,
       title: "untitled - Paint",
-      ico: "/img/pfp-editor/icons/paint.png",
+      icon: "/img/pfp-editor/icons/paint.png",
     },
     // {
     //   id: 2,
     //   fullScreen: false,
     //   title: "untitled - Paint",
-    //   ico: "/img/pfp-editor/icons/paint.png",
+    //   icon: "/img/pfp-editor/icons/paint.png",
     // },
   ]);
 
@@ -350,7 +383,7 @@ const PfpEditor = () => {
           toggleFullScreen={toggleFullScreen}
           index={index}
           title={window.title}
-          ico={window.ico}
+          icon={window.icon}
         >
           <Paint />
         </Window>

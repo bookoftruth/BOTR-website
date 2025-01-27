@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGlobalState } from "@/context/GlobalStateContext";
 import clsx from "clsx";
 
 const Loader = () => {
+  const { alreadyEntered, setAlreadyEntered, setIsMuted, setIsPlaying } = useGlobalState();
   const [loading, setLoading] = useState(true);
   const [zoomingIn, setZoomingIn] = useState(false);
-  const { alreadyEntered, setAlreadyEntered, setIsMuted, setIsPlaying } = useGlobalState();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,15 +28,14 @@ const Loader = () => {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [loading]);
 
-  const handleEnter = () => {
+  const handleEnter = useCallback(() => {
     setZoomingIn(true);
-    
     setTimeout(() => {
       setAlreadyEntered(true);
       setIsMuted(false);
       setIsPlaying(true);
     }, 1000);
-  };
+  }, [setAlreadyEntered, setIsMuted, setIsPlaying]);
 
   return (
     <button
