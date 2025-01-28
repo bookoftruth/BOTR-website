@@ -41,8 +41,9 @@ const PfpEditor = ({ windows, setWindows }) => {
           index={index}
           title={window.title}
           icon={window.icon}
+          description={window.description}
         >
-          <window.children />
+          <window.children fullScreen={window.fullScreen} />
         </Window>
       ))}
     </>

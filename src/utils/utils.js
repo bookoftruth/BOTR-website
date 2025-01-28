@@ -50,7 +50,7 @@ export const navLinks = [
   },
   {
     href: "/pfp-editor",
-    label: "PFP Editor",
+    label: "Image Editor",
     src: "/img/pfp-editor/icons/paint.png",
   },
   {
@@ -73,6 +73,7 @@ export const windowsConfig = [
     hidden: false,
     title: "untitled - Paint",
     icon: "/img/pfp-editor/icons/paint.png",
+    description: "For Help, click Help Topics on the Help Menu.",
     children: Paint,
   },
   // {

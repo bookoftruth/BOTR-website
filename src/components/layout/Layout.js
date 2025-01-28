@@ -6,9 +6,9 @@ const Layout = ({ children, theme, openWindow, showWindow }) => {
   return (
     <div className="select-none">
       <Navbar theme={theme} openWindow={openWindow} showWindow={showWindow} />
-      <Footer theme={theme}/>
       <Background theme={theme} />
-      <main className="relative">{children}</main>
+      <Footer theme={theme}/>
+      {children}
     </div>
   );
 }

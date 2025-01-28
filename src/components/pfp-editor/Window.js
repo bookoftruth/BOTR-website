@@ -14,7 +14,7 @@ const getInitialPosition = () => {
   };
   
 
-const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hideWindow, index, children, title, icon, alt }) => {
+const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hideWindow, index, children, title, icon, alt, description }) => {
     const [dimensionsDefined, setDimensionsDefined] = useState(false);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0, top: 0, left: 0 });
   
@@ -158,8 +158,8 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
       <div
         ref={containerRef}
         className={clsx(
-          "shadow-lg z-50 font-windows",
-          fullScreen ? "fixed" : "absolute overflow-auto",
+          "shadow-lg z-10 font-windows border-4 border-t-white border-l-white border-b-black border-r-black px-0.5 bg-windows-primary",
+          fullScreen ? "fixed" : "absolute",
           (closed || hidden) && "hidden"
         )}
         style={{
@@ -238,7 +238,27 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
             </div>
           </div>
 
+          <div className='w-full h-8 flex flex-row gap-4 pl-2 items-end'>
+            <button><span className='underline'>F</span>ile</button>
+            <button><span className='underline'>E</span>dit</button>
+            <button><span className='underline'>V</span>iew</button>
+            <button><span className='underline'>I</span>mage</button>
+            <button><span className='underline'>O</span>ptions</button>
+            <button><span className='underline'>H</span>elp</button>
+          </div>
+
           {children}
+
+          <div className='w-full h-8 mt-auto flex flex-row items-center gap-0.5'>
+            <div className='h-5/6 w-3/4 flex items-start justify-start pl-0.5 bg-windows-primary border border-t-black border-l-black border-b-white border-r-white'>
+                {dimensions.width > 400 && description}
+            </div>
+            <div className='h-5/6 w-2/12 flex items-center justify-center bg-windows-primary border border-t-black border-l-black border-b-white border-r-white'></div>
+            <div className='h-5/6 w-1/12 relative bg-windows-primary'>
+                <div className='absolute w-full h-full border border-t-black border-l-black border-b-white border-r-white'></div>
+                <Image src="/img/pfp-editor/resize-corner.svg" width={14} height={14} className='absolute bottom-0 right-0' />
+            </div>
+          </div>
         </div>
 
         <div

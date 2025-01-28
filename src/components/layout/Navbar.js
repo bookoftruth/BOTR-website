@@ -123,7 +123,7 @@ const NavLinks = ({
     {navLinks.map(
       ({ href, label, src }) =>
         !(theme === "editor" && label === "Book of Truth") &&
-        (theme === "editor" && label === "PFP Editor" ? (
+        (theme === "editor" && label === "Image Editor" ? (
           <DesktopShortcut
             key={href}
             theme={theme}
@@ -184,7 +184,7 @@ const SideBar = ({ menuOpen, setMenuOpen, setAlreadyEntered, theme, pathname }) 
     <div
       ref={menuRef}
       className={clsx(
-        "fixed top-0 right-0 h-full w-full sm:w-64 bg-black text-white shadow-lg transform xl:hidden transition-transform duration-300 z-30",
+        "fixed top-0 right-0 h-full w-full sm:w-64 bg-black text-white shadow-lg transform xl:hidden transition-transform duration-300 z-20",
         menuOpen ? "translate-x-0" : "translate-x-full"
       )}
     >
@@ -204,7 +204,7 @@ const SideBar = ({ menuOpen, setMenuOpen, setAlreadyEntered, theme, pathname }) 
 const DesktopShortcut = ({ theme, src, label, size, openWindow, showWindow }) => (
   <button
     onClick={() => {
-      if (theme === "editor" && label === "PFP Editor") {
+      if (theme === "editor" && label === "Image Editor") {
         openWindow(0);
         showWindow(0);
       }
@@ -226,7 +226,7 @@ const Navbar = ({ theme, openWindow, showWindow }) => {
     <>
       <div
         className={clsx(
-          "fixed top-0 h-24 w-full z-20 flex text-white",
+          "fixed top-0 h-24 w-full z-10 flex text-white",
           theme === "editor"
             ? "font-windows flex-row-reverse"
             : "items-center px-4 text-shadow-black",

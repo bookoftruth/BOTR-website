@@ -83,7 +83,7 @@ const EditorTemplate = ({ theme }) => {
 
   return (
     <>
-      <div className="flex bg-windows-primary pl-2 w-full h-10 items-center">
+      <div className="flex bg-windows-primary pl-2 w-full h-10 items-center border border-t-2 border-t-white">
         <button
           ref={(el) => (startRefs.current[1] = el)}
           onClick={() => setStartOpen(!startOpen)}
@@ -160,7 +160,7 @@ const Footer = ({ theme }) => (
   <>
     <div
       className={clsx(
-        "fixed flex flex-col z-20 justify-center w-full text-white",
+        "fixed flex flex-col z-10 justify-center w-full text-white",
         theme === "editor"
           ? "bottom-0 gap-2 font-windows"
           : "h-24 bottom-0 items-center sm:gap-1 text-shadow-black",
