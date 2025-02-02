@@ -5,7 +5,7 @@ import { useGlobalState } from "@/utils/GlobalStateContext";
 import clsx from "clsx";
 
 const Loader = () => {
-  const { alreadyEntered, setAlreadyEntered, setIsMuted, setIsPlaying } = useGlobalState();
+  const { alreadyEntered, setAlreadyEntered, setMusicPlaying } = useGlobalState();
   const [loading, setLoading] = useState(true);
   const [zoomingIn, setZoomingIn] = useState(false);
 
@@ -21,10 +21,9 @@ const Loader = () => {
     setZoomingIn(true);
     setTimeout(() => {
       setAlreadyEntered(true);
-      setIsMuted(false);
-      setIsPlaying(true);
+      setMusicPlaying(true);
     }, 1000);
-  }, [setAlreadyEntered, setIsMuted, setIsPlaying]);
+  }, [setAlreadyEntered, setMusicPlaying]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {

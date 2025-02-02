@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const VideoTemplate = ({ src }) => {
   return (
@@ -30,22 +33,29 @@ const ImageTemplate = ({ src }) => {
     );
 };
 
-const getBackgroundSrc = (theme) => {
-    switch (theme) {
-      case "roadmap":
-        return "/img/roadmap/roadmap_background.png";
-      case "soon":
-        return "/videos/background_soon.webm";
-      case "editor":
-        const randomNumber = Math.floor(Math.random() * 26) + 1;
-        return `/videos/pfp-editor/backgrounds/${randomNumber}.webm`;
-      default:
-        return "/videos/background.webm";
-    }
-  };
 
 const Background = ({ theme }) => {
-  const src = getBackgroundSrc(theme);
+  const [src, setSrc] = useState("");
+
+  useEffect(() => {
+    const getBackgroundSrc = (theme) => {
+      switch (theme) {
+        case "roadmap":
+          return "/img/roadmap/roadmap_background.png";
+        case "soon":
+          return "/videos/background_soon.webm";
+        case "editor":
+          const randomNumber = Math.floor(Math.random() * 26) + 1;
+          return `/videos/image-editor/backgrounds/${randomNumber}.webm`;
+        default:
+          return "/videos/background.webm";
+      }
+    };
+
+    setSrc(getBackgroundSrc(theme));
+  }, [theme]);
+
+  if (!src) return null;
 
   if (theme === "soon" || theme === "editor" || !theme) {
     return <VideoTemplate src={src} />;

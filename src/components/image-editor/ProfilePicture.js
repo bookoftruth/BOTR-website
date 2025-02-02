@@ -49,8 +49,8 @@ const ProfilePicture = ({isBlack}) => {
         <Image
           src={
             isBlack
-              ? "/img/pfp-editor/botr-black.png"
-              : "/img/pfp-editor/botr-white.png"
+              ? "/img/image-editor/botr-black.png"
+              : "/img/image-editor/botr-white.png"
           }
           alt="Book Cover"
           fill

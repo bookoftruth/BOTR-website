@@ -4,16 +4,14 @@ import { useRef, useEffect } from 'react';
 import { useGlobalState } from "@/utils/GlobalStateContext";
 
 const AudioPlayer = () => {
-  const { isMuted, isPlaying } = useGlobalState();
+  const { musicPlaying } = useGlobalState();
   const audioRef = useRef();
 
   useEffect(() => {
     const audioElement = audioRef.current;
 
     if (audioElement) {
-      audioElement.muted = isMuted;
-
-      if (isPlaying) {
+      if (musicPlaying) {
         audioElement.play().catch((err) => {
           console.error("Autoplay blocked or other error:", err);
         });
@@ -21,7 +19,7 @@ const AudioPlayer = () => {
         audioElement.pause();
       }
     }
-  }, [isMuted, isPlaying]);
+  }, [musicPlaying]);
 
   return <audio ref={audioRef} src="/music/music.mp3" loop />;
 };

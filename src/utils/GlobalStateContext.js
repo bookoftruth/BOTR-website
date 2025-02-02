@@ -5,12 +5,11 @@ import { createContext, useContext, useState } from "react";
 const GlobalStateContext = createContext();
 
 export const GlobalStateProvider = ({ children }) => {
-  const [isMuted, setIsMuted] = useState(true);
   const [alreadyEntered, setAlreadyEntered] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [musicPlaying, setMusicPlaying] = useState(false);
 
   return (
-    <GlobalStateContext.Provider value={{ isMuted, setIsMuted, alreadyEntered, setAlreadyEntered, isPlaying, setIsPlaying }}>
+    <GlobalStateContext.Provider value={{ alreadyEntered, setAlreadyEntered, musicPlaying, setMusicPlaying }}>
       {children}
     </GlobalStateContext.Provider>
   );

@@ -14,7 +14,7 @@ const getInitialPosition = () => {
   };
   
 
-const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hideWindow, index, children, title, icon, alt, description }) => {
+const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hidden, hideWindow, active, activateWindow, index, children, title, icon, description }) => {
     const [dimensionsDefined, setDimensionsDefined] = useState(false);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0, top: 0, left: 0 });
   
@@ -27,8 +27,10 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
       }
     }, []);
   
-    const containerRef = useRef(null);
+    const windowRef = useRef(null);
     const topBarRef = useRef(null);
+    const hideButtonRef = useRef(null);
+    const closeButtonRef = useRef(null);
     const isDragging = useRef(false);
     const dragOffset = useRef({ x: 0, y: 0 });
   
@@ -128,18 +130,18 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
         const newDimensions = { ...prev };
   
         if (resizeDirection.current === 'right') {
-          const newWidth = e.clientX - containerRef.current.getBoundingClientRect().left;
+          const newWidth = e.clientX - windowRef.current.getBoundingClientRect().left;
           newDimensions.width = Math.max(newWidth, 100);
         }
   
         if (resizeDirection.current === 'bottom') {
-          const newHeight = e.clientY - containerRef.current.getBoundingClientRect().top;
+          const newHeight = e.clientY - windowRef.current.getBoundingClientRect().top;
           newDimensions.height = Math.max(newHeight, 100);
         }
   
         if (resizeDirection.current === 'bottom-right') {
-          const newWidth = e.clientX - containerRef.current.getBoundingClientRect().left;
-          const newHeight = e.clientY - containerRef.current.getBoundingClientRect().top;
+          const newWidth = e.clientX - windowRef.current.getBoundingClientRect().left;
+          const newHeight = e.clientY - windowRef.current.getBoundingClientRect().top;
           newDimensions.width = Math.max(newWidth, 100);
           newDimensions.height = Math.max(newHeight, 100);
         }
@@ -156,9 +158,9 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
   
     return (
       <div
-        ref={containerRef}
+        ref={windowRef}
         className={clsx(
-          "shadow-lg z-10 font-windows border-4 border-t-white border-l-white border-b-black border-r-black px-0.5 bg-windows-primary",
+          "shadow-lg font-windows border-4 border-t-white border-l-white border-b-black border-r-black px-0.5 bg-windows-primary",
           fullScreen ? "fixed" : "absolute",
           (closed || hidden) && "hidden"
         )}
@@ -173,20 +175,32 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
           maxWidth: `calc(100vw - ${fullScreen ? 0 : dimensions.left}px)`,
           opacity: dimensionsDefined ? 1 : 0,
           transition: "opacity 0.1s ease-in",
+          zIndex: zIndex,
+        }}
+        onMouseDown={(e) => {
+          if (
+            hideButtonRef.current &&
+            closeButtonRef.current &&
+            !hideButtonRef.current.contains(e.target) &&
+            !closeButtonRef.current.contains(e.target)
+          ) {
+            activateWindow(index);
+          }
         }}
       >
         <div className="h-full w-full flex flex-col">
           <div
             ref={topBarRef}
             className={clsx(
-              "w-full h-6 bg-[#060087] z-10 items-center flex flex-row gap-1 cursor-move",
+              "w-full h-6 z-10 items-center flex flex-row gap-1 cursor-move",
+              active ? "bg-[#060087]" : "bg-[#808080]",
               !fullScreen && "cursor-move"
             )}
             onMouseDown={handleDragStart}
           >
             <Image
               src={icon}
-              alt={alt}
+              alt={title}
               width={250}
               height={250}
               className="h-4 w-auto ml-0.5"
@@ -195,11 +209,12 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
 
             <div className="flex ml-auto h-full w-auto">
               <button
+                ref={hideButtonRef}
                 className="h-full w-auto"
                 onClick={() => hideWindow(index)}
               >
                 <Image
-                  src="/img/pfp-editor/minimize.png"
+                  src="/img/image-editor/minimize.png"
                   alt="Minimize Window Control"
                   width={597}
                   height={528}
@@ -212,7 +227,7 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
                 onClick={() => toggleFullScreen(index)}
               >
                 <Image
-                  src="/img/pfp-editor/fullscreen.png"
+                  src="/img/image-editor/fullscreen.png"
                   alt="Full Window Control"
                   width={536}
                   height={528}
@@ -221,6 +236,7 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
               </button>
 
               <button
+                ref={closeButtonRef}
                 className="h-full w-auto"
                 onClick={() => {
                   closeWindow(index);
@@ -228,7 +244,7 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
                 }}
               >
                 <Image
-                  src="/img/pfp-editor/close.png"
+                  src="/img/image-editor/close.png"
                   alt="Close Window Control"
                   width={536}
                   height={528}
@@ -238,25 +254,49 @@ const Window = ({ fullScreen, toggleFullScreen, closed, closeWindow, hidden, hid
             </div>
           </div>
 
-          <div className='w-full h-8 flex flex-row gap-4 pl-2 items-end'>
-            <button><span className='underline'>F</span>ile</button>
-            <button><span className='underline'>E</span>dit</button>
-            <button><span className='underline'>V</span>iew</button>
-            <button><span className='underline'>I</span>mage</button>
-            <button><span className='underline'>O</span>ptions</button>
-            <button><span className='underline'>H</span>elp</button>
+          <div className="w-full h-8 flex flex-row gap-4 pl-2 items-end">
+            <button>
+              <span className="underline">F</span>ile
+            </button>
+            <button>
+              <span className="underline">E</span>dit
+            </button>
+            <button>
+              <span className="underline">V</span>iew
+            </button>
+            {index === 0 && (
+              <>
+                <button>
+                  <span className="underline">I</span>mage
+                </button>
+                <button>
+                  <span className="underline">O</span>ptions
+                </button>
+              </>
+            )}
+            <button>
+              <span className="underline">H</span>elp
+            </button>
           </div>
 
-          {children}
+          <div className="h-full w-full overflow-auto border-2 border-t-black border-l-black border-b-white border-r-white bg-[#D8D8D8]">
+            {children}
+          </div>
 
-          <div className='w-full h-8 mt-auto flex flex-row items-center gap-0.5'>
-            <div className='h-5/6 w-3/4 flex items-start justify-start pl-0.5 bg-windows-primary border border-t-black border-l-black border-b-white border-r-white'>
-                {dimensions.width > 400 && description}
+          <div className="w-full h-8 mt-auto flex flex-row items-center gap-0.5">
+            <div className="h-5/6 w-3/4 flex items-start justify-start pl-0.5 bg-windows-primary border border-t-black border-l-black border-b-white border-r-white">
+              {dimensions.width > 400 && description}
             </div>
-            <div className='h-5/6 w-2/12 flex items-center justify-center bg-windows-primary border border-t-black border-l-black border-b-white border-r-white'></div>
-            <div className='h-5/6 w-1/12 relative bg-windows-primary'>
-                <div className='absolute w-full h-full border border-t-black border-l-black border-b-white border-r-white'></div>
-                <Image src="/img/pfp-editor/resize-corner.svg" width={14} height={14} className='absolute bottom-0 right-0' />
+            <div className="h-5/6 w-2/12 flex items-center justify-center bg-windows-primary border border-t-black border-l-black border-b-white border-r-white"></div>
+            <div className="h-5/6 w-1/12 relative bg-windows-primary">
+              <div className="absolute w-full h-full border border-t-black border-l-black border-b-white border-r-white"></div>
+              <Image
+                src="/img/image-editor/resize-corner.svg"
+                alt='Resize Window Control'
+                width={14}
+                height={14}
+                className="absolute bottom-0 right-0"
+              />
             </div>
           </div>
         </div>

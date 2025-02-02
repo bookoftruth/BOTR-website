@@ -5,7 +5,7 @@ import Roadmap from "@/components/roadmap/Roadmap";
 
 export default function RoadmapPage() {
   return (
-    <div className="h-full w-full overflow-auto">
+    <div className="h-full w-full overflow-auto scrollbar-hide">
       <Layout theme="roadmap">
         <Roadmap />
       </Layout>

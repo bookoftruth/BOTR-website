@@ -16,7 +16,9 @@ const Title = ({ theme, setAlreadyEntered, activeLabel }) => (
     <Link
       href="/"
       onClick={() => setAlreadyEntered(true)}
-      className="text-start font-gothic text-shadow-white-2 text-3xl sm:text-5xl flex-shrink-0 text-black"
+      className={clsx("text-start font-gothic text-shadow-white-2 text-3xl sm:text-5xl flex-shrink-0 text-black",
+        theme === "editor" && "text-[#008082]"
+      )}
     >
       {activeLabel === "Roadmap" ? (
         <Image
@@ -60,7 +62,7 @@ const LinkTemplate = ({ theme, src, label, size }) => (
       <Image src={src} alt={label} width={size} height={size} />
     )}
     <div
-      className={clsx(theme === "editor" && "bg-windows-secondary px-1 mt-1 whitespace-nowrap")}
+      className={clsx(theme === "editor" && "mt-1 whitespace-nowrap")}
     >
       {label}
     </div>
@@ -108,16 +110,16 @@ const NavLinks = ({
   setMenuOpen,
   setAlreadyEntered,
   isMobile,
-  openWindow,
-  showWindow,
+  activateWindow
 }) => (
   <>
     {theme === "editor" && (
       <DesktopShortcut
         theme={theme}
-        src="/img/pfp-editor/icons/system.png"
-        label="System"
+        src="/img/image-editor/icons/system.png"
+        label="My Computer"
         size={48}
+        activateWindow={activateWindow}
       />
     )}
     {navLinks.map(
@@ -130,8 +132,7 @@ const NavLinks = ({
             src={src}
             label={label}
             size={48}
-            openWindow={openWindow}
-            showWindow={showWindow}
+            activateWindow={activateWindow}
           />
         ) : (
           <NavLink
@@ -148,30 +149,35 @@ const NavLinks = ({
         ))
     )}
     {theme === "editor" && (
-      <Link
-        href="https://pump.fun/coin/73242b77KLvkkUNRQRT3CYNbNFq28dFoy8F2tF6apump"
-        target="_blank"
-      >
-        <DesktopShortcut
-          theme={theme}
-          src="/img/pfp-editor/icons/bin.png"
-          label="Recycle Bin"
-          size={48}
-        />
-      </Link>
+      <DesktopShortcut
+        theme={theme}
+        src="/img/image-editor/icons/bin.png"
+        label="Recycle Bin"
+        size={48}
+        activateWindow={activateWindow}
+      />
     )}
   </>
 );
 
 
-const SideBar = ({ menuOpen, setMenuOpen, setAlreadyEntered, theme, pathname }) => {
+const SideBar = ({
+  menuOpen,
+  setMenuOpen,
+  setAlreadyEntered,
+  theme,
+  pathname,
+}) => {
   const menuRef = useRef();
 
-  const handleClickOutside = useCallback((event) => {
-    if (menuRef.current && !menuRef.current.contains(event.target)) {
-      setMenuOpen(false);
-    }
-  }, [setMenuOpen]);
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+    },
+    [setMenuOpen]
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -195,18 +201,29 @@ const SideBar = ({ menuOpen, setMenuOpen, setAlreadyEntered, theme, pathname }) 
         &times;
       </button>
       <nav className="flex flex-col mt-16 space-y-6 text-2xl">
-        <NavLinks theme={theme} pathname={pathname} setMenuOpen={setMenuOpen} setAlreadyEntered={setAlreadyEntered} isMobile />
+        <NavLinks
+          theme={theme}
+          pathname={pathname}
+          setMenuOpen={setMenuOpen}
+          setAlreadyEntered={setAlreadyEntered}
+          isMobile
+        />
       </nav>
     </div>
   );
 };
 
-const DesktopShortcut = ({ theme, src, label, size, openWindow, showWindow }) => (
+const DesktopShortcut = ({ theme, src, label, size, activateWindow }) => (
   <button
     onClick={() => {
-      if (theme === "editor" && label === "Image Editor") {
-        openWindow(0);
-        showWindow(0);
+      if (theme === "editor") {
+        if (label === "Image Editor") {
+          activateWindow(0);
+        } else if (label === "Recycle Bin") {
+          activateWindow(1);
+        } else if (label === "My Computer") {
+          activateWindow(2);
+        }
       }
     }}
     className="flex flex-col items-center justify-center p-2 w-24"
@@ -215,7 +232,7 @@ const DesktopShortcut = ({ theme, src, label, size, openWindow, showWindow }) =>
   </button>
 );
 
-const Navbar = ({ theme, openWindow, showWindow }) => {
+const Navbar = ({ theme, activateWindow }) => {
   const { setAlreadyEntered } = useGlobalState();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -248,10 +265,10 @@ const Navbar = ({ theme, openWindow, showWindow }) => {
         >
           <nav
             className={clsx(
-              "flex-row",
+              "flex-row hidden",
               theme === "editor"
-                ? "flex text-sm pl-2 pt-4 h-sm:hidden"
-                : "hidden xl:flex justify-center items-center text-2xl 2xl:text-3xl gap-6 sm:gap-10"
+                ? "text-sm pl-2 pt-4 h-sm:hidden sm:flex"
+                : "xl:flex justify-center items-center text-2xl 2xl:text-3xl gap-6 sm:gap-10"
             )}
           >
             <div
@@ -265,8 +282,7 @@ const Navbar = ({ theme, openWindow, showWindow }) => {
                 pathname={pathname}
                 setMenuOpen={setMenuOpen}
                 setAlreadyEntered={setAlreadyEntered}
-                openWindow={openWindow}
-                showWindow={showWindow}
+                activateWindow={activateWindow}
               />
             </div>
 
@@ -275,7 +291,7 @@ const Navbar = ({ theme, openWindow, showWindow }) => {
                 <div>
                   <NavLink
                     theme={theme}
-                    src="/img/pfp-editor/icons/botr.png"
+                    src="/img/image-editor/icons/botr.png"
                     label="Book of Truth"
                     href="/"
                     pathname={pathname}
@@ -291,7 +307,7 @@ const Navbar = ({ theme, openWindow, showWindow }) => {
                 >
                   <DesktopShortcut
                     theme={theme}
-                    src="/img/pfp-editor/icons/music.png"
+                    src="/img/image-editor/icons/music.png"
                     label="Music"
                     size={48}
                   />

@@ -78,6 +78,11 @@ body {
   border-right: 1px solid #000000;
 }
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 a, button, [role="button"] {
   cursor: url('/img/cursors/select.svg') 7 0, pointer;
 }
