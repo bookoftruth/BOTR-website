@@ -1,7 +1,7 @@
 "use client";
 
 import Layout from "@/components/layout/Layout";
-import Roadmap from "@/components/roadmap/Roadmap";
+import Roadmap from "@/components/pages/roadmap/Roadmap";
 
 export default function RoadmapPage() {
   return (

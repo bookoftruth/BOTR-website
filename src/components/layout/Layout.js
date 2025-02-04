@@ -1,11 +1,11 @@
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 import Background from "./Background";
+import TopBar from "./TopBar/TopBar";
 
 const Layout = ({ children, theme, activateWindow }) => {
   return (
     <div className="select-none">
-      <Navbar theme={theme} activateWindow={activateWindow} />
+      <TopBar theme={theme} activateWindow={activateWindow} />
       <Background theme={theme} />
       <Footer theme={theme} />
       {children}

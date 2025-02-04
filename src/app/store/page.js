@@ -1,7 +1,7 @@
 "use client";
 
 import Layout from "@/components/layout/Layout";
-import Store from "@/components/store/Store";
+import Store from "@/components/pages/store/Store";
 
 export default function StorePage() {
   return (

@@ -1,11 +1,16 @@
 'use client';
 
 import Image from "next/image";
-import AudioButton from "../layout/AudioButton";
 import clsx from "clsx";
 import { useState, useRef, useEffect } from "react";
+import AudioButton from "@/components/layout/Audio/AudioButton";
+import NavBar from "@/components/layout/TopBar/NavLinks/NavBar";
+import { useGlobalState } from "@/utils/GlobalStateContext";
+import SocialLinks from "@/components/layout/Footer/SocialLinks";
 
 const BottomBar = ({ theme, windows, activateWindow }) => {
+  const { setAlreadyEntered } = useGlobalState();
+
   const [startOpen, setStartOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
   const startRefs = useRef([]);
@@ -93,31 +98,23 @@ const BottomBar = ({ theme, windows, activateWindow }) => {
           startOpen ? "block" : "hidden"
         )}
       >
-        <div className="bg-[#808080] w-10 flex-shrink-0"></div>
-        <div className="text-white text-5xl font-thin h-10 w-full absolute bottom-2 left-[2.25rem] origin-bottom-left -rotate-90">
+        <div className="bg-windows-secondary w-10 flex-shrink-0"></div>
+        <div className="text-white text-4xl font-sans-serif font-thin h-10 w-full absolute bottom-2 left-[2.7rem] origin-bottom-left -rotate-90">
           <span className="text-windows-primary font-black">Windows</span>95
         </div>
-        <div className="overflow-auto scrollbar-hide">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum. Sed ut
-          perspiciatis unde omnis iste natus error sit voluptatem accusantium
-          doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-          inventore veritatis et quasi architecto beatae vitae dicta sunt
-          explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-          odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-          voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-          quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam
-          eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-          voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem
-          ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi
-          consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate
-          velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum
-          fugiat quo voluptas nulla pariatur?
+        <div className="overflow-auto scrollbar-hide font-windows w-full">
+          <NavBar
+            theme={theme}
+            setAlreadyEntered={setAlreadyEntered}
+            activateWindow={activateWindow}
+            setMenuOpen={undefined}
+            bottomBar
+          />
+          <div className="bg-windows-secondary w-full h-0.5 border-b border-b-white"></div>
+          <SocialLinks 
+            theme={theme}
+            bottomBar
+          />
         </div>
       </div>
     </>

@@ -30,7 +30,7 @@
 
 :root {
   --windows-primary-color: #C0BFBD;
-  --windows-secondary-color: #008682;
+  --windows-secondary-color: #808080;
   --windows-tertiary-color: #060087;
   --size: min(100vw, 100vh);
   --size-botr: calc(var(--size) * 0.5);
@@ -39,9 +39,16 @@
 
 html,
 body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: 'Terminal', monospace;
+  overflow: hidden;
   scroll-behavior: smooth;
   background-color: black;
   transition: background-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .bg-white-body {

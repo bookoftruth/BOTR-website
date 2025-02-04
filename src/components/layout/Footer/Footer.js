@@ -3,52 +3,8 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { ADDRESS, socialLinks } from '@/utils/utils';
-import Link from 'next/link';
-
-const SocialLinks = ({ theme }) => (
-  <div
-    className={clsx(
-      'flex-row hover:text-gray-200',
-      theme === 'editor' ? 'hidden pl-2 h-sm:hidden sm:flex' : 'flex justify-center gap-2 xs:gap-4 md:gap-10'
-    )}
-  >
-    {socialLinks.map(({ href, icon, iconEditor, alt }) => (
-      <Link
-        key={href}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={clsx(
-          'flex items-center',
-          theme === 'editor' && 'flex-col-reverse p-2 w-24'
-        )}
-      >
-        <span
-          className={clsx(
-            theme === 'editor'
-              ? 'text-sm px-1 my-1'
-              : 'text-3xl hidden sm:block'
-          )}
-        >
-          {alt}
-        </span>
-        <div
-          className={clsx(
-            theme !== 'editor' && 'block sm:hidden transition-transform duration-200 hover:scale-110'
-          )}
-        >
-          <Image
-            src={theme === 'editor' ? iconEditor : icon}
-            alt={alt}
-            width={theme === 'editor' ? 48 : 36}
-            height={theme === 'editor' ? 48 : 36}
-          />
-        </div>
-      </Link>
-    ))}
-  </div>
-);
+import { ADDRESS } from '@/utils/utils';
+import SocialLinks from './SocialLinks';
 
 const BaseTemplate = () => {
   const [copied, setCopied] = useState(false);

@@ -1,4 +1,4 @@
-import Soon from "../layout/Soon";
+import Soon from "../../layout/Soon";
 
 const Reader = () => {
   return (

@@ -1,6 +1,6 @@
-import MyComputer from "@/components/image-editor/MyComputer";
-import Paint from "@/components/image-editor/Paint";
-import RecycleBin from "@/components/image-editor/RecycleBin";
+import MyComputer from "@/components/pages/image-editor/Windows/MyComputer";
+import Paint from "@/components/pages/image-editor/Windows/Paint/Paint";
+import RecycleBin from "@/components/pages/image-editor/Windows/RecycleBin";
 
 export const ADDRESS = '73242b77KLvkkUNRQRT3CYNbNFq28dFoy8F2tF6apump';
 

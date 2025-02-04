@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Window from './Window';
+import Window from './Windows/Window';
 import { windowsConfig } from '@/utils/utils';
-import Layout from '../layout/Layout';
+import Layout from '../../layout/Layout';
 import BottomBar from './BottomBar';
 
 const ImageEditor = () => {

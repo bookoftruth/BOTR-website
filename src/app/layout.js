@@ -1,4 +1,4 @@
-import AudioPlayer from "@/components/layout/AudioPlayer";
+import AudioPlayer from "@/components/layout/Audio/AudioPlayer";
 import "./globals.css";
 import { GlobalStateProvider } from "@/utils/GlobalStateContext";
 
@@ -12,10 +12,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <GlobalStateProvider>
-          <div className="h-screen w-screen overflow-auto font-terminal">
-            <AudioPlayer />
-            {children}
-          </div>
+          <AudioPlayer />
+          {children}
         </GlobalStateProvider>
       </body>
     </html>

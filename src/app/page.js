@@ -2,7 +2,7 @@
 
 import Layout from "@/components/layout/Layout";
 import Loader from "@/components/layout/Loader";
-import { SceneContainer } from "@/components/botr/SceneContainer";
+import { SceneContainer } from "@/components/pages/home/SceneContainer";
 import { useGlobalState } from "@/utils/GlobalStateContext";
 import { useEffect } from "react";
 
@@ -22,7 +22,7 @@ export default function Home() {
   }, [alreadyEntered]);
 
   return (
-    <div className="fixed h-full w-full overflow-hidden">
+    <>
       {!alreadyEntered ? <Loader /> : null}
       <div
         className={`transition-opacity duration-1000 ${
@@ -33,6 +33,6 @@ export default function Home() {
           <SceneContainer />
         </Layout>
       </div>
-    </div>
+    </>
   );
 }

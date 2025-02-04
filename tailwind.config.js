@@ -16,6 +16,7 @@ module.exports = {
         'gothic': ['"OldEnglishGothicPixel"', 'sans-serif'],
         'terminal': ['"Terminal"', 'monospace'],
         'windows' : ['"Windows"', 'sans-serif'],
+        'sans-serif' : ['sans-serif'],
       },
       colors: {
         'windows-primary': 'var(--windows-primary-color)',

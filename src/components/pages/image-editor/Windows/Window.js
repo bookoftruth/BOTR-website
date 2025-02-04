@@ -193,7 +193,7 @@ const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hid
             ref={topBarRef}
             className={clsx(
               "w-full h-6 z-10 items-center flex flex-row gap-1 cursor-move",
-              active ? "bg-[#060087]" : "bg-[#808080]",
+              active ? "bg-windows-tertiary" : "bg-windows-secondary",
               !fullScreen && "cursor-move"
             )}
             onMouseDown={handleDragStart}
