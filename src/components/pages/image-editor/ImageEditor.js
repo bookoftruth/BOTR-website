@@ -94,6 +94,7 @@ const ImageEditor = () => {
           title={window.title}
           icon={window.icon}
           description={window.description}
+          paint={window.paint}
         >
           <window.children fullScreen={window.fullScreen} />
         </Window>

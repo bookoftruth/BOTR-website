@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-const ProfilePicture = ({isBlack}) => {
+const ProfilePicture = ({ isBlack, imageRef, profilePicture, setProfilePicture }) => {
     const [dragging, setDragging] = useState(false);
-    const [profilePicture, setProfilePicture] = useState(null);
   
     const handleDragOver = (event) => {
       event.preventDefault();
@@ -41,6 +40,7 @@ const ProfilePicture = ({isBlack}) => {
   
     return (
       <div
+        ref={imageRef}
         className="relative flex items-center justify-center size-book"
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
@@ -59,7 +59,7 @@ const ProfilePicture = ({isBlack}) => {
           className="absolute z-10 w-full h-auto"
           draggable={false}
         />
-  
+
         {!profilePicture && (
           <div
             className={`drag-upload border-4 border-dashed ${
@@ -81,15 +81,33 @@ const ProfilePicture = ({isBlack}) => {
             />
           </div>
         )}
-  
+
         {profilePicture && (
-          <Image
-            src={profilePicture}
-            alt="Profile"
-            width={3464}
-            height={3464}
-            className="profile-picture"
-          />
+          <div className="relative h-full w-full">
+            <div className="relative h-full w-full">
+              <Image
+                src={profilePicture}
+                alt="Profile"
+                width={3464}
+                height={3464}
+                className="profile-picture"
+              />
+              <Image
+                src="/img/image-editor/filters/filter5.jpg"
+                alt="Filter"
+                width={3464}
+                height={3464}
+                className="profile-picture mix-blend-multiply opacity-50"
+                draggable={false}
+              />
+            </div>
+            {/* <button
+              onClick={handleDownload}
+              className="mt-4 p-2 bg-blue-500 text-white rounded"
+            >
+              Download as PNG
+            </button> */}
+          </div>
         )}
       </div>
     );

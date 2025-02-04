@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ProfilePicture from './ProfilePicture';
 import clsx from 'clsx';
 
-const Paint = ({fullScreen}) => {
+const Paint = ({ fullScreen, imageRef, profilePicture, setProfilePicture }) => {
   const [isBlack, setIsBlack] = useState(false);
 
   return (
@@ -26,7 +26,7 @@ const Paint = ({fullScreen}) => {
         Toggle Image
       </button>
 
-      <ProfilePicture isBlack={isBlack} />
+      <ProfilePicture isBlack={isBlack} imageRef={imageRef} profilePicture={profilePicture} setProfilePicture={setProfilePicture} />
     </div>
   );
 };

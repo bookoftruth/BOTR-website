@@ -1,8 +1,9 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
+import html2canvas from 'html2canvas';
 
 const getInitialPosition = () => {
     return {
@@ -14,9 +15,29 @@ const getInitialPosition = () => {
   };
   
 
-const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hidden, hideWindow, active, activateWindow, index, children, title, icon, description }) => {
+const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hidden, hideWindow, active, activateWindow, index, children, title, icon, description, paint = false }) => {
     const [dimensionsDefined, setDimensionsDefined] = useState(false);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0, top: 0, left: 0 });
+    const [help, setHelp] = useState(false);
+    const [file, setFile] = useState(false);
+    const [profilePicture, setProfilePicture] = useState(null);
+
+    const handleDownload = async () => {
+      if (imageRef.current) {
+        const canvas = await html2canvas(imageRef.current, {
+          backgroundColor: null,
+          useCORS: true,
+        });
+
+        const dataUrl = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = "botr-image.png";
+        link.click();
+      }
+    };
+
+    const imageRef = useRef(null);
   
     useEffect(() => {
       if (typeof window !== 'undefined') {
@@ -31,6 +52,8 @@ const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hid
     const topBarRef = useRef(null);
     const hideButtonRef = useRef(null);
     const closeButtonRef = useRef(null);
+    const helpButtonRefs = useRef([]);
+    const fileButtonRefs = useRef([]);
     const isDragging = useRef(false);
     const dragOffset = useRef({ x: 0, y: 0 });
   
@@ -155,6 +178,24 @@ const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hid
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
+
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (
+          helpButtonRefs.current.every((ref) => ref && !ref.contains(event.target))
+        ) {
+          setHelp(false);
+        }
+        else if (
+          fileButtonRefs.current.every((ref) => ref && !ref.contains(event.target))
+        ) {
+          setFile(false);
+        }
+      };
+  
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
   
     return (
       <div
@@ -255,9 +296,35 @@ const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hid
           </div>
 
           <div className="w-full h-8 flex flex-row gap-4 pl-2 items-end">
-            <button>
-              <span className="underline">F</span>ile
-            </button>
+            <div className="relative">
+              <button
+                ref={(el) => (fileButtonRefs.current[0] = el)}
+                onClick={() => setFile(!file)}
+              >
+                <span className="underline">F</span>ile
+              </button>
+              {file && (
+                <div
+                  ref={(el) => (fileButtonRefs.current[1] = el)}
+                  className={clsx(
+                    "absolute bg-black w-64 z-20 left-0 p-2 flex border-2 border-t-white border-l-white border-b-black border-r-black",
+                    profilePicture
+                      ? "bg-windows-primary text-black"
+                      : "bg-windows-secondary text-windows-primary"
+                  )}
+                >
+                  <button
+                    disabled={!profilePicture}
+                    onClick={() => {
+                      setFile(!file);
+                      handleDownload();
+                    }}
+                  >
+                    Save as
+                  </button>
+                </div>
+              )}
+            </div>
             <button>
               <span className="underline">E</span>dit
             </button>
@@ -274,13 +341,33 @@ const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hid
                 </button>
               </>
             )}
-            <button>
-              <span className="underline">H</span>elp
-            </button>
+            <div className="relative">
+              <button
+                ref={(el) => (helpButtonRefs.current[0] = el)}
+                onClick={() => setHelp(!help)}
+              >
+                <span className="underline">H</span>elp
+              </button>
+              {help && (
+                <div
+                  ref={(el) => (helpButtonRefs.current[1] = el)}
+                  className="absolute bg-black w-64 z-20 left-0 text-black p-2 flex bg-windows-primary border-2 border-t-white border-l-white border-b-black border-r-black"
+                >
+                  Create you BOTR image for a PFP or even a NFT soon! Then save
+                  it through the File menu.
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="h-full w-full overflow-auto border-2 border-t-black border-l-black border-b-white border-r-white bg-[#D8D8D8]">
-            {children}
+            {paint && React.isValidElement(children)
+              ? React.cloneElement(children, {
+                  imageRef,
+                  profilePicture,
+                  setProfilePicture,
+                })
+              : children}
           </div>
 
           <div className="w-full h-8 mt-auto flex flex-row items-center gap-0.5">
@@ -292,7 +379,7 @@ const Window = ({ zIndex, fullScreen, toggleFullScreen, closed, closeWindow, hid
               <div className="absolute w-full h-full border border-t-black border-l-black border-b-white border-r-white"></div>
               <Image
                 src="/img/image-editor/resize-corner.svg"
-                alt='Resize Window Control'
+                alt="Resize Window Control"
                 width={14}
                 height={14}
                 className="absolute bottom-0 right-0"

@@ -94,6 +94,10 @@ a, button, [role="button"] {
   cursor: url('/img/cursors/select.svg') 7 0, pointer;
 }
 
+button:disabled {
+  cursor: url('/img/cursors/mouse.svg'), auto;
+}
+
 .cursor-move {
   cursor: url('/img/cursors/move.svg') 12 12, move;
 }

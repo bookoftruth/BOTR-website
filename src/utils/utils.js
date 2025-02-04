@@ -79,6 +79,7 @@ export const windowsConfig = [
     icon: "/img/image-editor/icons/paint.png",
     description: "For Help, click Help Topics on the Help Menu.",
     children: Paint,
+    paint: true,
   },
   {
     zIndex: 19,
