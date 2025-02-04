@@ -102,7 +102,10 @@ const BottomBar = ({ theme, windows, activateWindow }) => {
         <div className="text-white text-4xl font-sans-serif font-thin h-10 w-full absolute bottom-2 left-[2.7rem] origin-bottom-left -rotate-90">
           <span className="text-windows-primary font-black">Windows</span>95
         </div>
-        <div className="overflow-auto scrollbar-hide font-windows w-full">
+        <div
+          onClick={() => setStartOpen(false)}
+          className="overflow-auto scrollbar-hide font-windows w-full"
+        >
           <NavBar
             theme={theme}
             setAlreadyEntered={setAlreadyEntered}
@@ -111,10 +114,7 @@ const BottomBar = ({ theme, windows, activateWindow }) => {
             bottomBar
           />
           <div className="bg-windows-secondary w-full h-0.5 border-b border-b-white"></div>
-          <SocialLinks 
-            theme={theme}
-            bottomBar
-          />
+          <SocialLinks theme={theme} bottomBar />
         </div>
       </div>
     </>
